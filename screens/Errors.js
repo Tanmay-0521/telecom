@@ -1,195 +1,286 @@
 import * as React from "react";
+import { Text, StyleSheet, View, Pressable,ScrollView } from "react-native";
 import { Image } from "expo-image";
-import { StyleSheet, View, Pressable, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
-// import Start from "./Start";
-import Values from "./Values";
-import Warnings from "./Warnings";
-// import Menu from "./Menu";
+import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
 
 const Errors = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.errors}>
-      <Pressable
-        style={styles.errorsInner}
-        onPress={() => navigation.navigate(Menu)}
-      >
-        <Image
-          style={styles.frameChild}
-          contentFit="cover"
-          source={require("../assets/arrow-1.png")}
-        />
-      </Pressable>
-      <Text style={[styles.mainsFail, styles.lowTypo]}>{`Main’s Fail:  `}</Text>
-      <Text
-        style={[styles.lowAcVoltage, styles.lowTypo]}
-      >{`Low AC Voltage: `}</Text>
-      <Text
-        style={[styles.highAcVoltage, styles.lowTypo]}
-      >{`High AC Voltage: `}</Text>
-      <Text
-        style={[styles.lowDcVoltage, styles.lowTypo]}
-      >{`Low DC Voltage: `}</Text>
-      <Text
-        style={[styles.highDcVoltage, styles.lowTypo]}
-      >{`High DC Voltage: `}</Text>
-      <View style={styles.errorsChild} />
-      <View style={[styles.errorsItem, styles.errorsPosition]} />
-      <View style={[styles.rectangleView, styles.errorsChild2Position]} />
-      <View style={[styles.errorsChild1, styles.errorsPosition]} />
-      <View style={[styles.errorsChild2, styles.errorsChild2Position]} />
-      <Text style={[styles.f, styles.lowTypo]}>F</Text>
-      <Text style={[styles.f1, styles.f1Typo]}>F</Text>
-      <Text style={[styles.f2, styles.f2Typo]}>F</Text>
-      <Text style={[styles.f3, styles.f1Typo]}>F</Text>
-      <Text style={[styles.f4, styles.f2Typo]}>F</Text>
+      <View style={styles.valuesParent}>
+       <ScrollView Vertical={true} contentContainerStyle={styles.scrollViewContent}>
+        {/* scroll effect */}
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>Mains Fail</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>Low AC Voltage</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>High AC Voltage</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>Low DC Voltage</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>High DC Voltage</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>Battery Low</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>High Temperature</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.values}>
+          <View style={styles.frameParent}>
+            <View style={styles.systemTemperatureWrapper}>
+              <Text style={styles.systemTemperature}>
+                Critical Load (SPD Fail)
+              </Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.c}>0</Text>
+            </View>
+          </View>
+        </View>
+        </ScrollView>
+      </View>
+      <Text style={styles.alarms}>Alarms</Text>
+      <Image
+        style={styles.logoIcon}
+        contentFit="cover"
+        source={require("../assets/logo.png")}
+      />
+      <View style={styles.navigator}>
+        <View style={styles.navi}>
+          <Pressable
+            style={styles.iconFlexBox}
+            onPress={() => navigation.navigate("Values")}
+          >
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/values.png")}
+            />
+            <Text style={[styles.page1, styles.pageTypo]}>Page 1</Text>
+          </Pressable>
+          <View style={[styles.iconGroup, styles.iconFlexBox]}>
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/alarms.png")}
+            />
+            <Text style={styles.pageTypo}>Alarms</Text>
+          </View>
+          <Pressable
+            style={styles.iconFlexBox}
+            onPress={() => navigation.navigate("Warnings")}
+          >
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/warnings.png")}
+            />
+            <Text style={[styles.page1, styles.pageTypo]}>Page 3</Text>
+          </Pressable>
+          <Pressable
+            style={styles.iconFlexBox}
+            onPress={() => navigation.navigate("About")}
+          >
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/about.png")}
+            />
+            <Text style={[styles.page1, styles.pageTypo]}>Page 4</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  lowTypo: {
+  pageTypo: {
+    marginLeft: 10,
     textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
+    color: Color.black,
+    fontFamily: FontFamily.b1B,
     fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    position: "absolute",
+    fontSize: FontSize.b1_size,
   },
-  errorsPosition: {
-    left: "64.72%",
-    right: "23.06%",
-    backgroundColor: Color.colorDarkslateblue,
+  iconFlexBox: {
+    padding: Padding.p_xs,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  systemTemperature: {
+    width: 136,
+    textAlign: "center",
+    color: Color.colorBlack,
+    fontFamily: FontFamily.b1B,
+    fontWeight: "700",
+    fontSize: FontSize.b1_size,
+  },
+  systemTemperatureWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  c: {
+    fontWeight: "500",
+    fontFamily: FontFamily.b1,
+    color: Color.black,
+    textAlign: "center",
+    fontSize: FontSize.b1_size,
+  },
+  wrapperShadowBox: {
+    marginLeft: 6,
+    paddingVertical: Padding.p_2xs,
+    paddingHorizontal: Padding.p_6xs,
+    width: 81,
+    shadowOpacity: 1,
+    elevation: 4,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    backgroundColor: Color.colorDarkslategray,
+    justifyContent: "center",
+    flexDirection: "row",
     borderRadius: Border.br_6xl,
-    width: "12.22%",
-    height: "7.63%",
-    position: "absolute",
+    alignItems: "center",
+    overflow: "hidden",
   },
-  errorsChild2Position: {
-    left: "66.67%",
-    right: "21.11%",
-    backgroundColor: Color.colorDarkslateblue,
-    borderRadius: Border.br_6xl,
-    width: "12.22%",
-    height: "7.63%",
-    position: "absolute",
-  },
-  f1Typo: {
-    left: "68.61%",
-    textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    position: "absolute",
-  },
-  f2Typo: {
-    left: "70.56%",
-    textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    position: "absolute",
-  },
-  frameChild: {
-    width: 41,
-    height: 0,
-  },
-  errorsInner: {
-    top: 705,
-    left: 149,
+  frameParent: {
+    top: 10,
+    left: 10,
+    backgroundColor: Color.colorSilver_200,
+    width: 241,
     padding: Padding.p_3xs,
-    position: "absolute",
-  },
-  mainsFail: {
-    left: "5.83%",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    top: "21%",
-  },
-  lowAcVoltage: {
-    top: "33.38%",
-    left: "5.83%",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-  },
-  highAcVoltage: {
-    top: "45.75%",
-    left: "5.83%",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-  },
-  lowDcVoltage: {
-    top: "58.13%",
-    left: "5.83%",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-  },
-  highDcVoltage: {
-    top: "70.5%",
-    left: "5.83%",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-  },
-  errorsChild: {
-    top: "19.13%",
-    right: "42.78%",
-    bottom: "73.25%",
-    left: "45%",
-    backgroundColor: Color.colorDarkslateblue,
+    justifyContent: "center",
+    flexDirection: "row",
     borderRadius: Border.br_6xl,
-    width: "12.22%",
-    height: "7.63%",
+    alignItems: "center",
+    position: "absolute",
+    overflow: "hidden",
+  },
+  values: {
+    width: 261,
+    height: 88,
+  },
+  valuesParent: {
+    width: "75.83%",
+    top: 145,
+    right: "12.22%",
+    bottom: 153,
+    left: "11.94%",
+    borderRadius: Border.br_xl,
+    backgroundColor: Color.colorGainsboro,
+    paddingHorizontal: 6,
+    paddingVertical: Padding.p_6xs,
+    alignItems: "center",
     position: "absolute",
   },
-  errorsItem: {
-    top: "31.5%",
-    bottom: "60.88%",
+  alarms: {
+    top: 78,
+    left: 39,
+    fontSize: FontSize.h1_size,
+    fontWeight: "800",
+    fontFamily: FontFamily.h1,
+    width: 274,
+    height: 47,
+    textAlign: "left",
+    color: Color.colorBlack,
+    position: "absolute",
   },
-  rectangleView: {
-    top: "43.88%",
-    bottom: "48.5%",
+  logoIcon: {
+    top: 74,
+    right: 37,
+    width: 53,
+    height: 55,
+    position: "absolute",
   },
-  errorsChild1: {
-    top: "56.13%",
-    bottom: "36.25%",
+  icon: {
+    borderRadius: Border.br_8xs,
+    width: 30,
+    height: 30,
+    overflow: "hidden",
   },
-  errorsChild2: {
-    top: "69%",
-    bottom: "23.38%",
+  page1: {
+    display: "none",
   },
-  f: {
-    left: "48.89%",
-    top: "21%",
+  iconGroup: {
+    backgroundColor: Color.colorDimgray,
+    borderRadius: Border.br_6xl,
+    padding: Padding.p_xs,
   },
-  f1: {
-    top: "33.38%",
+  navi: {
+    backgroundColor: Color.colorDarkslategray,
+    flexDirection: "row",
+    borderRadius: Border.br_6xl,
   },
-  f2: {
-    top: "45.75%",
-  },
-  f3: {
-    top: "58%",
-  },
-  f4: {
-    top: "70.88%",
+  navigator: {
+    marginLeft: -148,
+    bottom: 46,
+    left: "50%",
+    flexDirection: "row",
+    position: "absolute",
   },
   errors: {
-    backgroundColor: Color.colorSteelblue,
+    backgroundColor: Color.black,
     flex: 1,
     width: "100%",
     height: 800,

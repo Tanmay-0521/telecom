@@ -1,237 +1,389 @@
 import * as React from "react";
+import { Text, StyleSheet, View, Pressable, ScrollView } from "react-native";
+//import { Text, StyleSheet, View, Pressable } from "react-native";
 import { Image } from "expo-image";
-import { StyleSheet, View, Pressable, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {Border, Padding, FontSize, FontFamily, Color } from "../GlobalStyles";
-import axios from 'axios'; // Import axios directly
-// import { useFonts } from "expo-font";
-import { useState, useEffect } from 'react';
-const channelId = 2409420;
-const serverUrl = 'http://192.168.0.105:3000';
+import { Color, Padding, Border, FontFamily, FontSize } from "../GlobalStyles";
+import RealTimeGraphsScreen from "./RealTimeGraphsScreen ";
+import PressableMenu from "./PressableMenu";
 
 const Values = () => {
   const navigation = useNavigation();
-  const [temperature, setTemperature] = useState('');
-  const [humidity, setHumidity] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${serverUrl}/`);
-      const { data } = response;
-      setTemperature(data[0]?.data[0]?.temperature); // Access temperature data from the response
-      setHumidity(data[1]?.data[1]?.humidity); // Access humidity data from the response
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      setLoading(false);
-    }
-  };
 
   return (
     <View style={styles.values}>
-      <Pressable style={styles.valuesInner} onPress={() => navigation.navigate('Menu')}>
+      <View style={styles.valuesParent}>
+        <ScrollView Vertical={true} contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.values1}>
+          <View style={[styles.frameParent, styles.frameParentFlexBox]}>
+            {/* Press for Graph */}
+          <Pressable
+              style={styles.frameParentFlexBox}
+              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+            <View style={styles.wrapperFlexBox}>
+              <Text style={styles.systemTemperature}>DC Voltage</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.cTypo}>000V</Text>
+            </View>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.values1}>
+          <View style={[styles.frameParent, styles.frameParentFlexBox]}>
+            {/* Press for Graph */}
+          <Pressable
+              style={styles.frameParentFlexBox}
+              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+            <View style={styles.wrapperFlexBox}>
+              <Text style={styles.systemTemperature}>AC Voltage</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.cTypo}>000V</Text>
+            </View>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.values1}>
+          <View style={[styles.frameParent, styles.frameParentFlexBox]}>
+            {/* Press for Graph */}
+          <Pressable
+              style={styles.frameParentFlexBox}
+              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+            <View style={styles.wrapperFlexBox}>
+              <Text style={styles.systemTemperature}>Total Rect Current</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.cTypo}>000A</Text>
+            </View>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.values1}>
+          <View style={[styles.frameParent, styles.frameParentFlexBox]}>
+            {/* Press for Graph */}
+          <Pressable
+              style={styles.frameParentFlexBox}
+              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+            <View style={styles.wrapperFlexBox}>
+              <Text style={styles.systemTemperature}>Humidity</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.cTypo}>000%</Text>
+            </View>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.values1}>
+          <View style={[styles.frameParent, styles.frameParentFlexBox]}>
+             {/* Press for Graph */}
+          <Pressable
+              style={styles.frameParentFlexBox}
+              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+            <View style={styles.wrapperFlexBox}>
+              <Text style={styles.systemTemperature}>System Temperature</Text>
+            </View>
+            <View style={styles.wrapperShadowBox}>
+              <Text style={styles.cTypo}>000°C</Text>
+            </View>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.frameWrapper}>
+          <View style={[styles.frameParent2, styles.frameParentFlexBox]}>
+            <View
+              style={[styles.rectifierStatuesWrapper, styles.wrapperFlexBox]}
+            >
+              <Text style={styles.systemTemperature}>Rectifier Statues</Text>
+            </View>
+            <View style={styles.vectorShadowBox}>
+              <Image
+                style={styles.frameChild}
+                contentFit="cover"
+                source={require("../assets/line-2.png")}
+              />
+              <Text style={[styles.text, styles.cTypo]}>1</Text>
+              <Text style={[styles.text1, styles.textTypo]}>3</Text>
+            </View>
+            <View style={styles.vectorShadowBox}>
+              <Image
+                style={styles.frameChild}
+                contentFit="cover"
+                source={require("../assets/line-2.png")}
+              />
+              <Text style={[styles.text2, styles.textTypo]}>2</Text>
+              <Text style={[styles.text1, styles.textTypo]}>3</Text>
+            </View>
+            <View style={styles.vectorShadowBox}>
+              <Image
+                style={styles.frameChild}
+                contentFit="cover"
+                source={require("../assets/line-2.png")}
+              />
+              <Text style={[styles.text2, styles.textTypo]}>3</Text>
+              <Text style={[styles.text1, styles.textTypo]}>3</Text>
+            </View>
+          </View>
+        </View>
+        </ScrollView>
+      </View>
+      <Text style={styles.values6}>Values</Text>
+      {/* <Pressable
+            onPress={() => navigation.navigate(PressableMenu)}> */}
         <Image
-          style={styles.frameChild}
+          style={styles.logoIcon}
           contentFit="cover"
-          source={require('../assets/arrow-1.png')}
+          source={require("../assets/logo.png")} 
         />
-      </Pressable>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <>
-          <Text style={[styles.text, styles.voltageTypo]}>Temp: {temperature}°C</Text>
-          <Text style={[styles.text, styles.voltageTypo]}>Humidity: {humidity}</Text>
-          <Text style={[styles.text, styles.text5Typo]}>Total Current: </Text>
-          <Text style={[styles.text, styles.voltageTypo]}>Battery Current: </Text>
-          <Text style={styles.rectifierStatus}>Rectifier Status: </Text>
-          <View style={[styles.valuesChild, styles.valuesChildLayout]} />
-          <View style={[styles.valuesItem, styles.valuesPosition]} />
-          <View style={[styles.rectangleView, styles.valuesPosition]} />
-          <View style={[styles.valuesChild1, styles.valuesPosition]} />
-          <View style={[styles.valuesChild2, styles.valuesChildLayout]} />
-          <View style={[styles.valuesChild3, styles.valuesChildLayout]} />
-          <View style={[styles.valuesChild4, styles.valuesChildLayout]} />
-          <Text style={[styles.text, styles.textTypo1]}>{temperature}</Text>
-          <Text style={[styles.text, styles.textTypo]}>1</Text>
-          <Text style={[styles.text, styles.textTypo]}>1</Text>
-          <Text style={[styles.text, styles.textTypo]}>1</Text>
-          <Text style={[styles.text, styles.textTypo1]}>2</Text>
-          <Text style={[styles.text, styles.text5Typo]}>{humidity}</Text>
-          <Text style={[styles.text, styles.voltageTypo]}>0000</Text>
-        </>
-      )}
+      {/* </Pressable> */}
+      <View style={styles.navigator}>
+        <View style={styles.navi}>
+          <View style={[styles.iconParent, styles.iconFlexBox]}>
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/values.png")}
+            />
+            <Text style={styles.pageTypo}>Values</Text>
+          </View>
+          <Pressable
+            style={styles.iconFlexBox}
+            onPress={() => navigation.navigate("Errors")}
+          >
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/alarms.png")}
+            />
+            <Text style={[styles.page2, styles.pageTypo]}>Page 2</Text>
+          </Pressable>
+          <Pressable
+            style={styles.iconFlexBox}
+            onPress={() => navigation.navigate("Warnings")}
+          >
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/warnings.png")}
+            />
+            <Text style={[styles.page2, styles.pageTypo]}>Page 3</Text>
+          </Pressable>
+          <Pressable
+            style={styles.iconFlexBox}
+            onPress={() => navigation.navigate("About")}
+          >
+            <Image
+              style={styles.icon}
+              contentFit="cover"
+              source={require("../assets/about.png")}
+            />
+            <Text style={[styles.page2, styles.pageTypo]}>Page 4</Text>
+          </Pressable>
+        </View>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
-  voltageTypo: {
-    textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    position: "absolute",
+  scrollViewContent: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
-  text5Typo: {
-    top: "45.75%",
-    textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    position: "absolute",
+  valuesParent: {
+    height: "650",
+    width: "100%",
+    flexDirection: "row",
   },
-  valuesChildLayout: {
-    backgroundColor: Color.colorDarkslateblue,
+  values1: {
+    width: 261,
+    height: 88,
+  },
+  frameParentFlexBox: {
+    justifyContent: "center",
+    width: 241,
+    backgroundColor: Color.colorSilver_200,
+    padding: Padding.p_3xs,
+    flexDirection: "row",
     borderRadius: Border.br_6xl,
-    width: "26.94%",
-    height: "7.63%",
-    position: "absolute",
+    alignItems: "center",
+    overflow: "hidden",
   },
-  valuesPosition: {
-    bottom: "25.13%",
-    top: "69.88%",
-    width: "9.44%",
-    height: "5%",
-    backgroundColor: Color.colorDarkslateblue,
-    borderRadius: Border.br_6xl,
-    position: "absolute",
+  wrapperFlexBox: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  textTypo1: {
-    left: "52.78%",
-    textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    position: "absolute",
+  cTypo: {
+    color: Color.black,
+    fontFamily: FontFamily.b1,
+    fontWeight: "500",
+    textAlign: "center",
+    fontSize: FontSize.b2_size,
   },
   textTypo: {
+    left: 7,
+    color: Color.black,
+    fontFamily: FontFamily.b1,
+    fontWeight: "500",
     textAlign: "center",
-    top: "70.5%",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
+    fontSize: FontSize.b2_size,
     position: "absolute",
+  },
+  iconFlexBox: {
+    padding: Padding.p_xs,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  pageTypo: {
+    marginLeft: 10,
+    textAlign: "left",
+    color: Color.black,
+    fontFamily: FontFamily.b1B,
+    fontWeight: "700",
+    fontSize: FontSize.b1_size,
+  },
+  systemTemperature: {
+    width: 136,
+    textAlign: "center",
+    color: Color.colorBlack,
+    fontFamily: FontFamily.b1B,
+    fontWeight: "700",
+    fontSize: FontSize.b1_size,
+  },
+  wrapperShadowBox: {
+    marginLeft: 6,
+    paddingVertical: Padding.p_2xs,
+    paddingHorizontal: Padding.p_6xs,
+    width: 81,
+    shadowOpacity: 1,
+    elevation: 4,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    backgroundColor: Color.colorDarkslategray,
+    justifyContent: "center",
+    flexDirection: "row",
+    borderRadius: Border.br_6xl,
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  frameParent: {
+    top: 10,
+    left: 10,
+    padding: Padding.p_2xs,
+    position: "absolute",
+  },
+  values1: {
+    width: 261,
+    height: 100,
+  },
+  rectifierStatuesWrapper: {
+    width: 124,
   },
   frameChild: {
-    width: 41,
-    height: 0,
-  },
-  valuesInner: {
-    top: 705,
-    left: 149,
-    padding: Padding.p_3xs,
+    left: 3,
+    maxHeight: "100%",
+    width: 20,
+    top: 25,
     position: "absolute",
-  },
-  dcVoltage: {
-    left: "5.83%",
-    top: "21%",
-  },
-  acVoltage: {
-    top: "33.38%",
-    left: "5.83%",
-  },
-  totalCurrent: {
-    left: "5.83%",
-  },
-  batteryCurrent: {
-    top: "58.13%",
-    left: "5.83%",
-  },
-  rectifierStatus: {
-    top: "70.5%",
-    textAlign: "left",
-    color: Color.colorWhite,
-    fontFamily: FontFamily.interBold,
-    fontWeight: "700",
-    fontSize: FontSize.size_6xl,
-    left: "5.83%",
-    position: "absolute",
-  },
-  valuesChild: {
-    top: "19.13%",
-    bottom: "73.25%",
-    left: "48.89%",
-    right: "24.17%",
-    backgroundColor: Color.colorDarkslateblue,
-    borderRadius: Border.br_6xl,
-    width: "26.94%",
-    height: "7.63%",
-  },
-  valuesItem: {
-    right: "27.78%",
-    left: "62.78%",
-  },
-  rectangleView: {
-    right: "16.94%",
-    left: "73.61%",
-  },
-  valuesChild1: {
-    right: "6.11%",
-    left: "84.44%",
-  },
-  valuesChild2: {
-    top: "31.5%",
-    bottom: "60.88%",
-    left: "48.89%",
-    right: "24.17%",
-    backgroundColor: Color.colorDarkslateblue,
-    borderRadius: Border.br_6xl,
-    width: "26.94%",
-    height: "7.63%",
-  },
-  valuesChild3: {
-    top: "43.88%",
-    right: "17.78%",
-    bottom: "48.5%",
-    left: "55.28%",
-    backgroundColor: Color.colorDarkslateblue,
-    borderRadius: Border.br_6xl,
-    width: "26.94%",
-    height: "7.63%",
-  },
-  valuesChild4: {
-    top: "56.13%",
-    right: "9.44%",
-    bottom: "36.25%",
-    left: "63.61%",
-    backgroundColor: Color.colorDarkslateblue,
-    borderRadius: Border.br_6xl,
-    width: "26.94%",
-    height: "7.63%",
   },
   text: {
-    top: "21%",
+    left: 8,
+    top: 1,
+    position: "absolute",
   },
   text1: {
-    left: "65.56%",
+    top: 25,
+  },
+  vectorShadowBox: {
+    height: 49,
+    width: 26,
+    marginLeft: 6,
+    shadowOpacity: 1,
+    elevation: 4,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    backgroundColor: Color.colorDarkslategray,
+    borderRadius: Border.br_6xl,
+    overflow: "hidden",
   },
   text2: {
-    left: "76.39%",
+    top: 1,
   },
-  text3: {
-    left: "87.22%",
+  frameParent2: {
+    padding: Padding.p_3xs,
   },
-  text4: {
-    top: "33.38%",
+  frameWrapper: {
+    padding: Padding.p_3xs,
   },
-  text5: {
-    left: "59.17%",
+  valuesParent: {
+    width: "76.94%",
+    top: 149,
+    right: "11.11%",
+    bottom: 150,
+    left: "11.94%",
+    borderRadius: Border.br_xl,
+    backgroundColor: Color.colorGainsboro,
+    paddingHorizontal: 8,
+    paddingVertical: Padding.p_3xs,
+    alignItems: "center",
+    position: "absolute",
   },
-  text6: {
-    top: "58%",
-    left: "67.5%",
+  values6: {
+    top: 70,
+    left: 39,
+    fontSize: FontSize.h1_size,
+    fontWeight: "800",
+    fontFamily: FontFamily.h1,
+    width: 274,
+    height: 60,
+    textAlign: "left",
+    color: Color.colorBlack,
+    position: "absolute",
+  },
+  logoIcon: {
+    top: 74,
+    right: 35,
+    width: 53,
+    height: 55,
+    position: "absolute",
+  },
+  icon: {
+    borderRadius: Border.br_8xs,
+    width: 30,
+    height: 30,
+    overflow: "hidden",
+  },
+  iconParent: {
+    backgroundColor: Color.colorDimgray,
+    borderRadius: Border.br_6xl,
+    padding: Padding.p_xs,
+  },
+  page2: {
+    display: "none",
+  },
+  navi: {
+    backgroundColor: Color.colorDarkslategray,
+    flexDirection: "row",
+    borderRadius: Border.br_6xl,
+  },
+  navigator: {
+    marginLeft: -144.5,
+    bottom: 46,
+    left: "50%",
+    height: 54,
+    //top: 675,
+    position: "absolute",
   },
   values: {
-    backgroundColor: Color.colorSteelblue,
+    backgroundColor: Color.black,
     flex: 1,
     width: "100%",
     height: 800,

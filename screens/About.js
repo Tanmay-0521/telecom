@@ -1,26 +1,41 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { Text, StyleSheet, View, Pressable, ScrollView } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
+//import { ScrollView } from "react-native-gesture-handler";
 
-const Warnings = () => {
+const About = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.warnings}>
-      <View style={styles.warningsChild} />
-      <Text style={styles.warnings1}>Warnings</Text>
-      <Text style={styles.noWarnings}>No Warnings</Text>
+    <View style={styles.about}>
+      <Text style={styles.aboutTheProject}>About the Project</Text>
       <Image
         style={styles.logoIcon}
         contentFit="cover"
         source={require("../assets/logo.png")}
       />
+      {/* <View style = {styles.container}>  */}
+      <ScrollView Vertical={true} contentContainerStyle={styles.scrollViewContent}></ScrollView>
+      <View style={styles.rectangleParent}>
+      
+        <View style={styles.frameChild} />
+        
+        <Text style={styles.lorem}>
+          SysMonitor Pro is a comprehensive system monitoring application
+          designed to provide real-time insights into the critical parameters of
+          your system. With a user-friendly interface and robust functionality,
+          SysMonitor Pro empowers users to keep a close eye on temperature,
+          pressure, voltage, and other essential metrics, ensuring optimal
+          performance and early detection of potential issues .
+        </Text>
+      </View>
+      {/* </View> */}
       <View style={styles.navigator}>
         <View style={styles.navi}>
           <Pressable
-            style={styles.iconFlexBox}
+            style={styles.frameViewFlexBox}
             onPress={() => navigation.navigate("Values")}
           >
             <Image
@@ -31,7 +46,7 @@ const Warnings = () => {
             <Text style={[styles.page1, styles.pageTypo]}>Page 1</Text>
           </Pressable>
           <Pressable
-            style={styles.iconFlexBox}
+            style={styles.frameViewFlexBox}
             onPress={() => navigation.navigate("Errors")}
           >
             <Image
@@ -41,25 +56,25 @@ const Warnings = () => {
             />
             <Text style={[styles.page1, styles.pageTypo]}>Page 2</Text>
           </Pressable>
-          <View style={[styles.iconContainer, styles.iconFlexBox]}>
+          <Pressable
+            style={styles.frameViewFlexBox}
+            onPress={() => navigation.navigate("Warnings")}
+          >
             <Image
               style={styles.icon}
               contentFit="cover"
               source={require("../assets/warnings.png")}
             />
-            <Text style={styles.pageTypo}>Warnings</Text>
-          </View>
-          <Pressable
-            style={styles.iconFlexBox}
-            onPress={() => navigation.navigate("About")}
-          >
+            <Text style={[styles.page1, styles.pageTypo]}>Page 3</Text>
+          </Pressable>
+          <View style={[styles.frameView, styles.frameViewFlexBox]}>
             <Image
               style={styles.icon}
               contentFit="cover"
               source={require("../assets/about.png")}
             />
-            <Text style={[styles.page1, styles.pageTypo]}>Page 4</Text>
-          </Pressable>
+            <Text style={styles.pageTypo}>{`About `}</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -75,51 +90,59 @@ const styles = StyleSheet.create({
     fontSize: FontSize.b1_size,
     textAlign: "left",
   },
-  iconFlexBox: {
+  frameViewFlexBox: {
     padding: Padding.p_xs,
-    alignItems: "center",
     flexDirection: "row",
+    alignItems: "center",
   },
-  warningsChild: {
-    width: "78.06%",
-    top: 141,
-    right: "11.11%",
-    bottom: 151,
-    left: "10.83%",
-    borderRadius: Border.br_xl,
-    backgroundColor: Color.colorGainsboro,
-    opacity: 0.5,
-    position: "absolute",
-  },
-  warnings1: {
+  aboutTheProject: {
     top: 78,
     left: 39,
     fontSize: FontSize.h1_size,
     fontWeight: "800",
     fontFamily: FontFamily.h1,
     width: 274,
-    height: 47,
+    height: 120,
     textAlign: "left",
     color: Color.colorBlack,
     position: "absolute",
   },
-  noWarnings: {
-    height: "56.75%",
-    top: "19.63%",
-    left: 61,
-    fontWeight: "500",
-    fontFamily: FontFamily.b1,
-    textAlign: "center",
-    width: 232,
-    fontSize: FontSize.b1_size,
-    color: Color.colorBlack,
-    position: "absolute",
-  },
   logoIcon: {
-    top: 70,
+    top: 110,
     right: 37,
     width: 53,
     height: 55,
+    position: "absolute",
+  },
+  frameChild: {
+    alignSelf: "stretch",
+    backgroundColor: Color.colorGainsboro,
+    height: 534,
+    opacity: 0.5,
+    zIndex: 0,
+    borderRadius: Border.br_xl,
+  },
+  lorem: {
+    width: "76.87%",
+    top: 16,
+    left: "11.74%",
+    fontWeight: "500",
+    fontFamily: FontFamily.b1,
+    height: 511,
+    zIndex: 1,
+    fontSize: FontSize.b1_size,
+    textAlign: "left",
+    color: Color.colorBlack,
+    position: "absolute",
+  },
+  rectangleParent: {
+    width: "78.06%",
+    top: 195,
+    right: "13.06%",
+    bottom: 151,
+    left: "8.89%",
+    alignItems: "center",
+    borderRadius: Border.br_xl,
     position: "absolute",
   },
   icon: {
@@ -131,7 +154,7 @@ const styles = StyleSheet.create({
   page1: {
     display: "none",
   },
-  iconContainer: {
+  frameView: {
     backgroundColor: Color.colorDimgray,
     borderRadius: Border.br_6xl,
   },
@@ -141,19 +164,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   navigator: {
-    marginLeft: -160,
+    marginLeft: -144,
     bottom: 46,
     left: "50%",
     flexDirection: "row",
     position: "absolute",
   },
-  warnings: {
+  about: {
     backgroundColor: Color.black,
     flex: 1,
     width: "100%",
     height: 800,
     overflow: "hidden",
   },
+  
 });
 
-export default Warnings;
+export default About;
