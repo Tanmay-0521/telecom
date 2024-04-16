@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View, Pressable, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Padding, FontSize, FontFamily, Color } from "../GlobalStyles";
+import SimpleLineChart from '../components/SimpleLineChart';
 // import Menu from "./Menu";
 
 const Warnings = () => {
@@ -20,7 +21,8 @@ const Warnings = () => {
           source={require("../assets/arrow-1.png")}
         />
       </Pressable>
-      <Text style={styles.noWarnings}>No Warnings</Text>
+      {/* <Text style={styles.noWarnings}>No Warnings</Text> */}
+      <SimpleLineChart />
     </View>
   );
 };

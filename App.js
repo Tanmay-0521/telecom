@@ -73,6 +73,7 @@ import Values from "./screens/Values";
 import Errors from "./screens/Errors";
 import Warnings from "./screens/Warnings";
 import 'react-native-gesture-handler';
+import Graph from "./screens/Graph";
 
 const Stack = createNativeStackNavigator();
 
@@ -93,11 +94,12 @@ const App = () => {
         }}
         initialRouteName="Menu" // Set initial route
       >
-        <Stack.Screen name="Start" component={Start} />
+        {/* <Stack.Screen name="Start" component={Start} /> */}
         <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="Values" component={Values} />
         <Stack.Screen name="Errors" component={Errors} />
         <Stack.Screen name="Warnings" component={Warnings} />
+        {/* <Stack.Screen name="Graph" component={Graph} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

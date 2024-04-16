@@ -7,6 +7,7 @@ import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
 import Values from "./Values";
 import Errors from "./Errors";
 import Warnings from "./Warnings";
+import Graph from "./Graph";
 
 const Menu = () => {
   const navigation = useNavigation();
