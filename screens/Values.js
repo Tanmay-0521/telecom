@@ -19,7 +19,8 @@ const Values = () => {
   const [rect2, setRect2curr] = useState(0);
   const [rect3, setRect3curr] = useState(0);
   const [humidity, sethumidity] = useState(0);
-  const tot_rec = {rect1} + {rect2} + {rect3};
+  const [tot_rec, setrec] = useState(0);
+  //const tot_rec = {rect1} + {rect2} + {rect3};
 
   const navigation = useNavigation();
   useEffect(() => {
@@ -35,7 +36,8 @@ const Values = () => {
           setDCvolt(recentData.dcVolt);
           setRect1curr(recentData.rect1Curr);
           setRect2curr(recentData.rect2Curr);
-          setRect3curr(recentData.rect3Curr);// Update recent temperature value
+          setRect3curr(recentData.rect3Curr);
+          setrec(recentData.rect1Curr+recentData.rect2Curr+recentData.rect3Curr);// Update recent temperature value
         }
       } catch (error) {
         console.error('Error fetching temperature data:', error);
