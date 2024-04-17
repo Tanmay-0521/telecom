@@ -63,7 +63,7 @@ const Values = () => {
               <Text style={styles.systemTemperature}>DC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.cTypo}>{Acvolt}V</Text>
+              <Text style={styles.cTypo}>{Dcvolt}V</Text>
             </View>
             </Pressable>
           </View>
@@ -78,7 +78,7 @@ const Values = () => {
               <Text style={styles.systemTemperature}>AC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.cTypo}>{Dcvolt}V</Text>
+              <Text style={styles.cTypo}>{Acvolt}V</Text>
             </View>
             </Pressable>
           </View>
