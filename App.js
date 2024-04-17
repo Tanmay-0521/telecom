@@ -59,6 +59,11 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="ACvolt"
+              component={ACvolt}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="Values"
               component={Values}
               options={{ headerShown: false }}
