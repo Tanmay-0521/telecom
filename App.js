@@ -13,6 +13,11 @@ import PressableMenu from "./screens/PressableMenu";
 import RealTimeGraphsScreenh from "./screens/RealTimeGraphsScreenh";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import Rect1curr from "./screens/Rect1curr";
+import Rect2curr from "./screens/Rect2curr";
+import Rect3curr from "./screens/Rect3curr";
+import ACvolt from "./screens/ACvolt";
+import DCvolt from "./screens/DCvolt";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -56,6 +61,31 @@ const App = () => {
             <Stack.Screen
               name="RealTimeGraphsScreenh"
               component={RealTimeGraphsScreenh}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ACvolt"
+              component={ACvolt}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="DCvolt"
+              component={DCvolt}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Rect1curr"
+              component={Rect1curr}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Rect2curr"
+              component={Rect2curr}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Rect3curr"
+              component={Rect3curr}
               options={{ headerShown: false }}
             />
             <Stack.Screen
