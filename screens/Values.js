@@ -8,10 +8,19 @@ import { Color, Padding, Border, FontFamily, FontSize } from "../GlobalStyles";
 import RealTimeGraphsScreen from "./RealTimeGraphsScreen ";
 import PressableMenu from "./PressableMenu";
 import RealTimeGraphsScreenh from "./RealTimeGraphsScreenh";
+import ACvolt from "./ACvolt";
+import DCvolt from "./DCvolt";
 
 const Values = () => {
   const [temperature, setTemperature] = useState(0);
+  const [Acvolt, setACvolt] = useState(0);
+  const [Dcvolt, setDCvolt] = useState(0);
+  const [rect1, setRect1curr] = useState(0);
+  const [rect2, setRect2curr] = useState(0);
+  const [rect3, setRect3curr] = useState(0);
   const [humidity, sethumidity] = useState(0);
+  const tot_rec = {rect1} + {rect2} + {rect3};
+
   const navigation = useNavigation();
   useEffect(() => {
     const fetchData = async () => {
@@ -21,13 +30,19 @@ const Values = () => {
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {
           setTemperature(recentData.temperature); 
-          sethumidity(recentData.humidity)// Update recent temperature value
+          sethumidity(recentData.humidity);
+          setACvolt(recentData.acVolt);
+          setDCvolt(recentData.dcVolt);
+          setRect1curr(recentData.rect1Curr);
+          setRect2curr(recentData.rect2Curr);
+          setRect3curr(recentData.rect3Curr);// Update recent temperature value
         }
       } catch (error) {
         console.error('Error fetching temperature data:', error);
       }
     };
     const interval = setInterval(fetchData, 2000); // Fetch data every 2 seconds
+    
 
     return () => clearInterval(interval); // Clean up the interval on unmount
   }, []);
@@ -41,12 +56,12 @@ const Values = () => {
             {/* Press for Graph */}
           <Pressable
               style={styles.frameParentFlexBox}
-              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+              onPress={() => navigation.navigate(ACvolt)}>
             <View style={styles.wrapperFlexBox}>
               <Text style={styles.systemTemperature}>DC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.cTypo}>000V</Text>
+              <Text style={styles.cTypo}>{Acvolt}V</Text>
             </View>
             </Pressable>
           </View>
@@ -56,12 +71,12 @@ const Values = () => {
             {/* Press for Graph */}
           <Pressable
               style={styles.frameParentFlexBox}
-              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+              onPress={() => navigation.navigate(DCvolt)}>
             <View style={styles.wrapperFlexBox}>
               <Text style={styles.systemTemperature}>AC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.cTypo}>000V</Text>
+              <Text style={styles.cTypo}>{Dcvolt}V</Text>
             </View>
             </Pressable>
           </View>
@@ -76,7 +91,7 @@ const Values = () => {
               <Text style={styles.systemTemperature}>Total Rect Current</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.cTypo}>000A</Text>
+              <Text style={styles.cTypo}>{tot_rec}A</Text>
             </View>
             </Pressable>
           </View>

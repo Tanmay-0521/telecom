@@ -19,7 +19,7 @@ const ACvolt = () => {
         const response = await fetch('http://192.168.93.17:4000/api/data');
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here
-        const tempData = data.map(item => item.Acvolt); // Corrected key name
+        const tempData = data.map(item => item.acVolt); // Corrected key name
 
         setChartData({
           labels: labels,
