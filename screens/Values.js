@@ -1,4 +1,5 @@
 import * as React from "react";
+import  { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, Pressable, ScrollView } from "react-native";
 //import { Text, StyleSheet, View, Pressable } from "react-native";
 import { Image } from "expo-image";
@@ -6,9 +7,30 @@ import { useNavigation } from "@react-navigation/native";
 import { Color, Padding, Border, FontFamily, FontSize } from "../GlobalStyles";
 import RealTimeGraphsScreen from "./RealTimeGraphsScreen ";
 import PressableMenu from "./PressableMenu";
+import RealTimeGraphsScreenh from "./RealTimeGraphsScreenh";
 
 const Values = () => {
+  const [temperature, setTemperature] = useState(0);
+  const [humidity, sethumidity] = useState(0);
   const navigation = useNavigation();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://192.168.93.17:4000/api/data');
+        const data = await response.json();
+        const recentData = data[0]; // Get the most recent data point
+        if (recentData) {
+          setTemperature(recentData.temperature); 
+          sethumidity(recentData.humidity)// Update recent temperature value
+        }
+      } catch (error) {
+        console.error('Error fetching temperature data:', error);
+      }
+    };
+    const interval = setInterval(fetchData, 2000); // Fetch data every 2 seconds
+
+    return () => clearInterval(interval); // Clean up the interval on unmount
+  }, []);
 
   return (
     <View style={styles.values}>
@@ -64,12 +86,12 @@ const Values = () => {
             {/* Press for Graph */}
           <Pressable
               style={styles.frameParentFlexBox}
-              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+              onPress={() => navigation.navigate(RealTimeGraphsScreenh)}>
             <View style={styles.wrapperFlexBox}>
               <Text style={styles.systemTemperature}>Humidity</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.cTypo}>000%</Text>
+              <Text style={styles.cTypo}>{humidity}%</Text>
             </View>
             </Pressable>
           </View>
@@ -84,7 +106,7 @@ const Values = () => {
               <Text style={styles.systemTemperature}>System Temperature</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.cTypo}>000°C</Text>
+              <Text style={styles.cTypo}>{temperature}°C</Text>
             </View>
             </Pressable>
           </View>
@@ -372,7 +394,7 @@ const styles = StyleSheet.create({
   navi: {
     backgroundColor: Color.colorDarkslategray,
     flexDirection: "row",
-    borderRadius: Border.br_6xl,
+    borderRadius: Border.br_xl,
   },
   navigator: {
     marginLeft: -144.5,

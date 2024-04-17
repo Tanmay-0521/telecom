@@ -10,7 +10,7 @@ import Errors from "./screens/Errors";
 import Warnings from "./screens/Warnings";
 import About from "./screens/About";
 import PressableMenu from "./screens/PressableMenu";
-
+import RealTimeGraphsScreenh from "./screens/RealTimeGraphsScreenh";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 
@@ -51,6 +51,11 @@ const App = () => {
              <Stack.Screen
               name="RealTimeGraphsScreen"
               component={RealTimeGraphsScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="RealTimeGraphsScreenh"
+              component={RealTimeGraphsScreenh}
               options={{ headerShown: false }}
             />
             <Stack.Screen

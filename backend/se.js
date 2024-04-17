@@ -6,7 +6,7 @@ const port = 4000; // Or any other port you prefer
 
 // MongoDB connection setup
 const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/';
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoURI);
 
 const ChannelSchema = new mongoose.Schema({
   id: Number,
@@ -19,7 +19,40 @@ const ChannelSchema = new mongoose.Schema({
 });
 
 const Channel = mongoose.model('Channel', ChannelSchema);
+const fetchRealTimeData = async () => {
+  try {
+    const latestData = await Channel.findOne().sort({ timestamp: -1 }).lean();
+    if (!latestData) {
+      throw new Error('No data found');
+    }
+    console.log(latestData);
+    return { temperature: latestData.temperature, humidity: latestData.humidity };
+  } catch (error) {
+    console.error('Error fetching real-time data:', error.message);
+    return null;
+  }
+};
 
+// API endpoint to fetch real-time data
+app.get('/api/real', async (req, res) => {
+  try {
+    const twoSecondsAgo = new Date(Date.now() - 2000);
+    const lastentries = await Channel.find({ time: { $gte: twoSecondsAgo } })
+      .sort({ time: -1 })
+      .limit(1)
+      .lean();
+
+    if (lastentries.length === 0) {
+      res.status(404).json({ error: 'No data found in the last 20 seconds.' });
+    } else {
+        // console.log(lastTwentySecondsEntries);
+      res.json(lastentries);
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+    res.status(500).json({ error: 'Failed to fetch data.' });
+  }
+});
 // API endpoint to fetch last 20 seconds data
 app.get('/api/data', async (req, res) => {
   try {
@@ -32,7 +65,7 @@ app.get('/api/data', async (req, res) => {
     if (lastTwentySecondsEntries.length === 0) {
       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
     } else {
-        // console.log(lastTwentySecondsEntries);
+        console.log(lastTwentySecondsEntries);
       res.json(lastTwentySecondsEntries);
     }
   } catch (error) {
@@ -40,6 +73,7 @@ app.get('/api/data', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch data.' });
   }
 });
+
 
 // Start the server
 app.listen(port, () => {
