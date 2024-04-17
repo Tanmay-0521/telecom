@@ -110,7 +110,7 @@ const RealTimeGraphsScreenh = () => {
     labels: [],
     datasets: [
       {
-        data: [],
+        data: [0,0,0,0,0,0,0,0,0],
         color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
       },
     ],
@@ -184,6 +184,7 @@ const chartConfig = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    top:350,
     // justifyContent: 'center',
     // alignItems: 'center',
     backgroundColor: '#fff',
