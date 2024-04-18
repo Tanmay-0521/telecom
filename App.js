@@ -18,6 +18,7 @@ import Rect2curr from "./screens/Rect2curr";
 import Rect3curr from "./screens/Rect3curr";
 import ACvolt from "./screens/ACvolt";
 import DCvolt from "./screens/DCvolt";
+import Totreccurr from "./screens/Totreccurr";
 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -49,8 +50,8 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="PressableMenu"
-              component={PressableMenu}
+              name="Totreccurr"
+              component={Totreccurr}
               options={{ headerShown: false }}
             />
              <Stack.Screen

@@ -19,7 +19,7 @@ const ACvolt = () => {
         const response = await fetch('http://192.168.0.105:4000/api/data');
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here
-        const tempData = data.map(item => item.acVolt); // Corrected key name
+        const tempData = data.map(item => item.Acvolt);
 
         setChartData({
           labels: labels,
@@ -50,7 +50,7 @@ const ACvolt = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>AC Voltage vs Time</Text>
+        <Text style={styles.sectionTitle}>Ac Volt vs Time</Text>
         <View style={styles.chartContainer}>
           <LineChart
             data={chartData}
@@ -58,8 +58,8 @@ const ACvolt = () => {
             height={200}
             chartConfig={{
               ...chartConfig,
-              decimalPlaces: 1,
-              formatYLabel: value =>  `${Math.round(value)}%`, // Format labels as integers with % suffix
+              decimalPlaces: 2,
+              // formatYLabel: value =>  `${(value)}%`, // Format labels as integers with °C suffix
             }}
             bezier
           />

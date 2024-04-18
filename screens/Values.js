@@ -10,7 +10,7 @@ import PressableMenu from "./PressableMenu";
 import RealTimeGraphsScreenh from "./RealTimeGraphsScreenh";
 import ACvolt from "./ACvolt";
 import DCvolt from "./DCvolt";
-
+import Totreccurr from "./Totreccurr";
 const Values = () => {
   const [temperature, setTemperature] = useState(0);
   const [Acvolt, setACvolt] = useState(0);
@@ -20,13 +20,16 @@ const Values = () => {
   const [rect3, setRect3curr] = useState(0);
   const [humidity, sethumidity] = useState(0);
   const [tot_rec, setrec] = useState(0);
+  const [textRatio1,setR1]= useState(1/3);
+  const [textRatio2,setR2]= useState(2/3);
+  const [textRatio3,setR3]= useState(3/3);
   //const tot_rec = {rect1} + {rect2} + {rect3};
-
+  // let textRatio1, textRatio2,textRatio3;
   const navigation = useNavigation();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.93.17:4000/api/data');
+        const response = await fetch('http://192.168.0.105:4000/api/data');
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {
@@ -37,8 +40,23 @@ const Values = () => {
           setRect1curr(recentData.Rect1curr);
           setRect2curr(recentData.Rect2curr);
           setRect3curr(recentData.Rect3curr);
-          setrec(recentData.rect1Curr+recentData.rect2Curr+recentData.rect3Curr);// Update recent temperature value
+          setrec(recentData.Rect1curr+recentData.Rect2curr+recentData.Rect3curr);// Update recent temperature value
+          // if (recentData.Rect1curr > 0 || recentData.Rect2curr > 0 || recentData.Rect3curr > 0) {
+          //   setR1(textRatio1 = '1/3');
+          //   // textRatio2 = '3/3';
+          // } else if ((recentData.Rect1curr > 0 && recentData.Rect2curr > 0 )||(recentData.Rect2curr > 0 && recentData.Rect3curr > 0 ) ||(recentData.Rect1curr > 0 && recentData.Rect3curr > 0  )){
+          //   setR2(textRatio2 = '2/3');
+          //   // textRatio2 = '3/3';
+          // } else if (recentData.Rect1curr > 0 && recentData.Rect2curr > 0  && recentData.Rect3curr > 0 ) {
+          //   setR3(textRatio3 = '3/3');
+          // } else {
+          //   setR1(textRatio1 = '0/1');
+          //   setR2(textRatio2 = '0/2');
+          //   setR3(textRatio3= '0/3');
+          // }
         }
+        // let textRatio1, textRatio2;
+        
       } catch (error) {
         console.error('Error fetching temperature data:', error);
       }
@@ -86,16 +104,16 @@ const Values = () => {
         <View style={styles.values1}>
           <View style={[styles.frameParent, styles.frameParentFlexBox]}>
             {/* Press for Graph */}
-          {/* <Pressable
+          <Pressable
               style={styles.frameParentFlexBox}
-              onPress={() => navigation.navigate(RealTimeGraphsScreen)}> */}
+              onPress={() => navigation.navigate(Totreccurr)}>
             <View style={styles.wrapperFlexBox}>
               <Text style={styles.systemTemperature}>Total Rect Current</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
               <Text style={styles.cTypo}>{tot_rec}A</Text>
             </View>
-            {/* </Pressable> */}
+            </Pressable>
           </View>
         </View>
         <View style={styles.values1}>
@@ -137,7 +155,7 @@ const Values = () => {
             >
               <Text style={styles.systemTemperature}>Rectifier Statues</Text>
             </View>
-            <View style={styles.vectorShadowBox}>
+            {/* <View style={styles.vectorShadowBox}>
               <Image
                 style={styles.frameChild}
                 contentFit="cover"
@@ -163,7 +181,40 @@ const Values = () => {
               />
               <Text style={[styles.text2, styles.textTypo]}>3</Text>
               <Text style={[styles.text1, styles.textTypo]}>3</Text>
-            </View>
+            </View> */}
+            <View style={styles.vectorShadowBox}>
+  <Image
+    style={styles.frameChild}
+    contentFit="cover"
+    source={require("../assets/line-2.png")}
+  />
+  {/* <Text style={[styles.text, styles.cTypo]}>1</Text> */}
+  <Text style={[styles.text1, styles.textTypo, textRatio1 === '1/3' ? styles.greenText : styles.textTypo]}>
+    {textRatio1}
+  </Text>
+</View>
+<View style={styles.vectorShadowBox}>
+  <Image
+    style={styles.frameChild}
+    contentFit="cover"
+    source={require("../assets/line-2.png")}
+  />
+  {/* <Text style={[styles.text2, styles.textTypo]}>2</Text> */}
+  <Text style={[styles.text1, styles.textTypo, textRatio2 === '2/3' ? styles.greenText : styles.textTypo]}>
+    {textRatio2}
+  </Text>
+</View>
+<View style={styles.vectorShadowBox}>
+  <Image
+    style={styles.frameChild}
+    contentFit="cover"
+    source={require("../assets/line-2.png")}
+  />
+  {/* <Text style={[styles.text2, styles.textTypo]}>3</Text> */}
+  <Text style={[styles.text1, styles.textTypo, textRatio3 === '3/3' ? styles.greenText : styles.textTypo]}>
+    {textRatio3}
+  </Text>
+</View>
           </View>
         </View>
         </ScrollView>
@@ -239,6 +290,13 @@ const styles = StyleSheet.create({
   values1: {
     width: 261,
     height: 88,
+  },
+  redText: {
+    color: 'red',
+  },
+  // Styles for green text color
+  greenText: {
+    color: 'green',
   },
   frameParentFlexBox: {
     justifyContent: "center",

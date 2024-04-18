@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
-const DCvolt = () => {
+const Totreccurr = () => {
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -19,7 +19,7 @@ const DCvolt = () => {
         const response = await fetch('http://192.168.0.105:4000/api/data');
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here
-        const tempData = data.map(item => item.Dcvolt);
+        const tempData = data.map(item => (item.Rect2curr+item.Rect1curr+item.Rect3curr));
 
         setChartData({
           labels: labels,
@@ -50,7 +50,7 @@ const DCvolt = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Dc Volt vs Time</Text>
+        <Text style={styles.sectionTitle}>Total Rectifier curr  vs Time</Text>
         <View style={styles.chartContainer}>
           <LineChart
             data={chartData}
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DCvolt;
+export default Totreccurr;
