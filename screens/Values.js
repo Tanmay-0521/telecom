@@ -32,11 +32,11 @@ const Values = () => {
         if (recentData) {
           setTemperature(recentData.temperature); 
           sethumidity(recentData.humidity);
-          setACvolt(recentData.acVolt);
-          setDCvolt(recentData.dcVolt);
-          setRect1curr(recentData.rect1Curr);
-          setRect2curr(recentData.rect2Curr);
-          setRect3curr(recentData.rect3Curr);
+          setACvolt(recentData.Acvolt);
+          setDCvolt(recentData.Dcvolt);
+          setRect1curr(recentData.Rect1curr);
+          setRect2curr(recentData.Rect2curr);
+          setRect3curr(recentData.Rect3curr);
           setrec(recentData.rect1Curr+recentData.rect2Curr+recentData.rect3Curr);// Update recent temperature value
         }
       } catch (error) {
@@ -58,7 +58,7 @@ const Values = () => {
             {/* Press for Graph */}
           <Pressable
               style={styles.frameParentFlexBox}
-              onPress={() => navigation.navigate(ACvolt)}>
+              onPress={() => navigation.navigate(DCvolt)}>
             <View style={styles.wrapperFlexBox}>
               <Text style={styles.systemTemperature}>DC Voltage</Text>
             </View>
@@ -73,7 +73,7 @@ const Values = () => {
             {/* Press for Graph */}
           <Pressable
               style={styles.frameParentFlexBox}
-              onPress={() => navigation.navigate(DCvolt)}>
+              onPress={() => navigation.navigate(ACvolt)}>
             <View style={styles.wrapperFlexBox}>
               <Text style={styles.systemTemperature}>AC Voltage</Text>
             </View>
@@ -86,16 +86,16 @@ const Values = () => {
         <View style={styles.values1}>
           <View style={[styles.frameParent, styles.frameParentFlexBox]}>
             {/* Press for Graph */}
-          <Pressable
+          {/* <Pressable
               style={styles.frameParentFlexBox}
-              onPress={() => navigation.navigate(RealTimeGraphsScreen)}>
+              onPress={() => navigation.navigate(RealTimeGraphsScreen)}> */}
             <View style={styles.wrapperFlexBox}>
               <Text style={styles.systemTemperature}>Total Rect Current</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
               <Text style={styles.cTypo}>{tot_rec}A</Text>
             </View>
-            </Pressable>
+            {/* </Pressable> */}
           </View>
         </View>
         <View style={styles.values1}>
@@ -109,6 +109,7 @@ const Values = () => {
             </View>
             <View style={styles.wrapperShadowBox}>
               <Text style={styles.cTypo}>{humidity}%</Text>
+              {/* <Text style={styles.cTypo}>00%</Text> */}
             </View>
             </Pressable>
           </View>
@@ -124,6 +125,7 @@ const Values = () => {
             </View>
             <View style={styles.wrapperShadowBox}>
               <Text style={styles.cTypo}>{temperature}°C</Text>
+              {/* <Text style={styles.cTypo}>00°C</Text> */}
             </View>
             </Pressable>
           </View>

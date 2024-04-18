@@ -110,7 +110,7 @@ const RealTimeGraphsScreenh = () => {
     labels: [],
     datasets: [
       {
-        data: [0,0,0,0,0,0,0,0,0],
+        data: [0,0,0,0,0,0,0,0,0,0],
         color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
       },
     ],
@@ -119,7 +119,7 @@ const RealTimeGraphsScreenh = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.93.17:4000/api/data');
+        const response = await fetch('http://192.168.0.105:4000/api/data');
         const newData = await response.json();
         const newLabel = formatTime(newData.time); // Format time here
 
