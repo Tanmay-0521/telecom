@@ -3,9 +3,63 @@ import { Text, StyleSheet, View, Pressable,ScrollView } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
-
+import  { useState, useEffect } from 'react';
 const Errors = () => {
   const navigation = useNavigation();
+  // const [lowac,setLowac]= useState(0);
+  // const [highac,setHighac]= useState(0);
+  const [criticalspd,setcriticspd]= useState(0);
+  // const [highdc45,sethighdc45]= useState(0);
+  const [Mainsf,setMainsf]= useState(0);
+  const [lowac,setlowac]= useState(0);
+  const [highac,sethighac]= useState(0);
+  const [lowdc,setlowdc]= useState(0);
+  const [lowdc46,setlowdc46]= useState(0);
+  const [highdc,sethighdc]= useState(0);
+
+  //const tot_rec = {rect1} + {rect2} + {rect3};
+  // // let textRatio1, textRatio2,textRatio3;
+  // Wlowac: 0,
+  //   Whighac: 0,
+  //   Wcriticalloadspdb: 0,
+  //   Whighdc54v: 0,
+  // Lowdc: 0,
+  //   Highac: 0,
+  //   Lowdc46: 0,
+  //   Highdc: 0,
+  //   Mainsfail: 0,
+  //   Lowac: 0,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://192.168.63.17:4000/api/data');
+        const data = await response.json();
+        const recentData = data[0]; // Get the most recent data point
+        if (recentData) {
+          // setLowac(recentData.Wlowac);
+          // setHighac(recentData.Whighac);
+          // // setWlowac(recentData.Wlowac); 
+          setcriticspd(recentData.Wcriticalloadspdb);
+          // sethighdc45(recentData.Whighdc54v);
+              setMainsf(recentData.Mainsfail);
+              sethighac(recentData.Highac);
+              sethighdc(recentData.Highdc);
+              setlowac(recentData.Lowac);
+              setlowdc(recentData.Lowdc);
+              setlowdc46(recentData.Lowdc46);
+          // }
+        }
+        // let textRatio1, textRatio2;
+        
+      } catch (error) {
+        console.error('Error fetching temperature data:', error);
+      }
+    };
+    const interval = setInterval(fetchData, 2000); // Fetch data every 2 seconds
+    
+
+    return () => clearInterval(interval); // Clean up the interval on unmount
+  }, []);
 
   return (
     <View style={styles.errors}>
@@ -18,7 +72,7 @@ const Errors = () => {
               <Text style={styles.systemTemperature}>Mains Fail</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.c}>0</Text>
+              <Text style={styles.c}>{Mainsf}</Text>
             </View>
           </View>
         </View>
@@ -28,7 +82,7 @@ const Errors = () => {
               <Text style={styles.systemTemperature}>Low AC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.c}>0</Text>
+              <Text style={styles.c}>{lowac}</Text>
             </View>
           </View>
         </View>
@@ -38,7 +92,7 @@ const Errors = () => {
               <Text style={styles.systemTemperature}>High AC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.c}>0</Text>
+              <Text style={styles.c}>{highac}</Text>
             </View>
           </View>
         </View>
@@ -48,7 +102,7 @@ const Errors = () => {
               <Text style={styles.systemTemperature}>Low DC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.c}>0</Text>
+              <Text style={styles.c}>{lowdc}</Text>
             </View>
           </View>
         </View>
@@ -58,7 +112,7 @@ const Errors = () => {
               <Text style={styles.systemTemperature}>High DC Voltage</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.c}>0</Text>
+              <Text style={styles.c}>{highdc}</Text>
             </View>
           </View>
         </View>
@@ -68,7 +122,7 @@ const Errors = () => {
               <Text style={styles.systemTemperature}>Battery Low</Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.c}>0</Text>
+              <Text style={styles.c}>{lowdc46}</Text>
             </View>
           </View>
         </View>
@@ -90,7 +144,7 @@ const Errors = () => {
               </Text>
             </View>
             <View style={styles.wrapperShadowBox}>
-              <Text style={styles.c}>0</Text>
+              <Text style={styles.c}>{criticalspd}</Text>
             </View>
           </View>
         </View>

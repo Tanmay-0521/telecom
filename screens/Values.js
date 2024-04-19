@@ -29,7 +29,7 @@ const Values = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.0.105:4000/api/data');
+        const response = await fetch('http://192.168.63.17:4000/api/data');
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {
