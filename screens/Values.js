@@ -11,6 +11,9 @@ import RealTimeGraphsScreenh from "./RealTimeGraphsScreenh";
 import ACvolt from "./ACvolt";
 import DCvolt from "./DCvolt";
 import Totreccurr from "./Totreccurr";
+import { Dimensions } from "react-native";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 const Values = () => {
   const [temperature, setTemperature] = useState(0);
   const [Acvolt, setACvolt] = useState(0);
@@ -278,6 +281,15 @@ const Values = () => {
 };
 
 const styles = StyleSheet.create({
+  root: {flex: 1, flexDirection: 'column'},
+  top: {
+    width: (Dimensions.get('window').width > 500) ? 200 : 100,
+    backgroundColor: 'pink'
+  },
+  bottom: {
+    flex: 1,
+    backgroundColor: 'lightblue'
+  },
   scrollViewContent: {
     flexGrow: 1,
     justifyContent: 'center',
@@ -298,11 +310,12 @@ const styles = StyleSheet.create({
   greenText: {
     color: 'green',
   },
-  frameParentFlexBox: {
+  frameParentFlexBox: { //DC Current wale
     justifyContent: "center",
-    width: 241,
+    width: wp(70),
     backgroundColor: Color.colorSilver_200,
-    padding: Padding.p_3xs,
+    //padding: Padding.p_3xs,
+    padding: wp(3),
     flexDirection: "row",
     borderRadius: Border.br_6xl,
     alignItems: "center",
@@ -317,43 +330,54 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.b1,
     fontWeight: "500",
     textAlign: "center",
-    fontSize: FontSize.b2_size,
+    // fontSize: FontSize.b2_size,
+    fontSize: wp(6)
   },
-  textTypo: {
+  textTypo: { //rectifer status wala
     left: 7,
     color: Color.black,
     fontFamily: FontFamily.b1,
     fontWeight: "500",
     textAlign: "center",
-    fontSize: FontSize.b2_size,
+    //fontSize: FontSize.b2_size,
+    fontSize: wp(2),
     position: "absolute",
   },
-  iconFlexBox: {
-    padding: Padding.p_xs,
+  iconFlexBox: {  //navigation wale
+    //padding: Padding.p_xs,
+    padding: wp(2),
     flexDirection: "row",
     alignItems: "center",
   },
-  pageTypo: {
-    marginLeft: 10,
+  pageTypo: { //navigation wale (value)
+    //marginLeft: 10,
+    marginLeft: wp(2),
     textAlign: "left",
     color: Color.black,
     fontFamily: FontFamily.b1B,
     fontWeight: "700",
-    fontSize: FontSize.b1_size,
+    //fontSize: FontSize.b1_size,
+    fontSize: wp(6),
   },
-  systemTemperature: {
-    width: 136,
+  systemTemperature: {  //rectifier wale
+    //width: 136,
+    width: wp(35),
     textAlign: "center",
     color: Color.colorBlack,
     fontFamily: FontFamily.b1B,
     fontWeight: "700",
-    fontSize: FontSize.b1_size,
+    //fontSize: FontSize.b1_size,
+    fontSize: wp(6),
   },
   wrapperShadowBox: {
-    marginLeft: 6,
-    paddingVertical: Padding.p_2xs,
-    paddingHorizontal: Padding.p_6xs,
-    width: 81,
+    //marginLeft: 6,
+    marginLeft: hp(0),
+    // paddingVertical: Padding.p_2xs,
+    // paddingHorizontal: Padding.p_6xs,
+    paddingVertical: wp(4),
+    paddingHorizontal: hp(2),
+    //width: 81,
+    width: wp(20),
     shadowOpacity: 1,
     elevation: 4,
     shadowRadius: 4,
@@ -370,17 +394,21 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   frameParent: {
-    top: 10,
-    left: 10,
+    // top: 10,
+    // left: 10,
+    top: hp(1),
+    left: wp(2),
     padding: Padding.p_2xs,
     position: "absolute",
   },
-  values1: {
+  values1: {  //DC ka distance (padding)
     width: 261,
-    height: 100,
+    //height: 100,
+    height: hp(15),
   },
   rectifierStatuesWrapper: {
-    width: 124,
+    //width: 124,
+    width: wp(30)
   },
   frameChild: {
     left: 3,
@@ -395,12 +423,16 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   text1: {
-    top: 25,
+    //top: 25,
+    top: hp(1)
   },
   vectorShadowBox: {
-    height: 49,
-    width: 26,
-    marginLeft: 6,
+    // height: 49,
+    // width: 26,
+    // marginLeft: 6,
+    height: hp(5),
+    width: wp(7),
+    marginLeft: wp(1),
     shadowOpacity: 1,
     elevation: 4,
     shadowRadius: 4,
@@ -420,49 +452,67 @@ const styles = StyleSheet.create({
     padding: Padding.p_3xs,
   },
   frameWrapper: {
-    padding: Padding.p_3xs,
+    //padding: Padding.p_3xs,
+    padding: hp(1),
   },
   valuesParent: {
-    width: "76.94%",
-    top: 149,
+    // width: "76.94%",
+    // top: 149,
+    // right: "11.11%",
+    // bottom: 150,
+    // left: "11.94%",
+    width: wp(80),
+    top: hp(15),
     right: "11.11%",
-    bottom: 150,
-    left: "11.94%",
+    bottom: hp(15),
+    left: wp(10),
     borderRadius: Border.br_xl,
     backgroundColor: Color.colorGainsboro,
     paddingHorizontal: 8,
-    paddingVertical: Padding.p_3xs,
+    //paddingVertical: Padding.p_3xs,
+    paddingVertical: hp(2),
     alignItems: "center",
     position: "absolute",
   },
   values6: {
-    top: 70,
-    left: 39,
-    fontSize: FontSize.h1_size,
+    // top: 70,
+    // left: 39,
+    top: hp(7),
+    left: wp(7),
+    // fontSize: FontSize.h1_size,
+    fontSize: wp(10),
     fontWeight: "800",
     fontFamily: FontFamily.h1,
-    width: 274,
-    height: 60,
+    // width: 274,
+    // height: 60,
+    width: wp(30),
+    height: hp(20),
     textAlign: "left",
     color: Color.colorBlack,
     position: "absolute",
   },
   logoIcon: {
-    top: 74,
-    right: 35,
-    width: 53,
-    height: 55,
+    // top: 74,
+    // right: 35,
+    // width: 53,
+    // height: 55,
+    top: hp(8),
+    right: wp(8),
+    width: wp(10),
+    height: hp(5),
     position: "absolute",
   },
   icon: {
     borderRadius: Border.br_8xs,
-    width: 30,
-    height: 30,
+    // width: 30,
+    // height: 30,
+    width: wp(10),
+    height: hp(4),
     overflow: "hidden",
   },
   iconParent: {
     backgroundColor: Color.colorDimgray,
-    borderRadius: Border.br_6xl,
+    borderRadius: Border.br_xl,
     padding: Padding.p_xs,
   },
   page2: {
@@ -474,11 +524,16 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xl,
   },
   navigator: {
-    marginLeft: -144.5,
-    bottom: 46,
-    left: "50%",
-    height: 54,
-    //top: 675,
+    // marginLeft: -144.5,
+    // bottom: 46,
+    // left: "50%",
+    // height: 54,
+    // top: 675,
+    marginLeft: wp(-37),
+    bottom: hp(2),
+    left: wp(50),
+    height: hp(20),
+    top: hp(95),
     position: "absolute",
   },
   values: {

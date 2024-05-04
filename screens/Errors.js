@@ -4,6 +4,8 @@ import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
 import  { useState, useEffect } from 'react';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 const Errors = () => {
   const navigation = useNavigation();
   // const [lowac,setLowac]= useState(0);
@@ -206,26 +208,31 @@ const Errors = () => {
 };
 
 const styles = StyleSheet.create({
-  pageTypo: {
-    marginLeft: 10,
+  pageTypo: { //navigation wale (errors)
+    // marginLeft: 10,
+    marginLeft: wp(2),
     textAlign: "left",
     color: Color.black,
     fontFamily: FontFamily.b1B,
     fontWeight: "700",
-    fontSize: FontSize.b1_size,
+    // fontSize: FontSize.b1_size,
+    fontSize: wp(6),
   },
-  iconFlexBox: {
-    padding: Padding.p_xs,
+  iconFlexBox: {  //navigation wale
+    // padding: Padding.p_xs,
+    padding: wp(2),
     flexDirection: "row",
     alignItems: "center",
   },
-  systemTemperature: {
-    width: 136,
+  systemTemperature: {  //errors wale
+    // width: 136,
+    width: wp(35),
     textAlign: "center",
     color: Color.colorBlack,
     fontFamily: FontFamily.b1B,
     fontWeight: "700",
-    fontSize: FontSize.b1_size,
+    // fontSize: FontSize.b1_size,
+    fontSize: wp(6),
   },
   systemTemperatureWrapper: {
     flexDirection: "row",
@@ -239,10 +246,14 @@ const styles = StyleSheet.create({
     fontSize: FontSize.b1_size,
   },
   wrapperShadowBox: {
-    marginLeft: 6,
-    paddingVertical: Padding.p_2xs,
-    paddingHorizontal: Padding.p_6xs,
-    width: 81,
+    // marginLeft: 6,
+    marginLeft: hp(0),
+    // paddingVertical: Padding.p_2xs,
+    // paddingHorizontal: Padding.p_6xs,
+    paddingVertical: wp(4),
+    paddingHorizontal: hp(2),
+    // width: 81,
+    width: wp(20),
     shadowOpacity: 1,
     elevation: 4,
     shadowRadius: 4,
@@ -258,12 +269,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
   },
-  frameParent: {
-    top: 10,
-    left: 10,
+  frameParent: {  //errors wale
+    // top: 10,
+    // left: 10,
+    top: hp(1),
+    left: wp(2),
     backgroundColor: Color.colorSilver_200,
-    width: 241,
-    padding: Padding.p_3xs,
+    // width: 241,
+    width: wp(70),
+    // padding: Padding.p_3xs,
+    padding: wp(3),
     justifyContent: "center",
     flexDirection: "row",
     borderRadius: Border.br_6xl,
