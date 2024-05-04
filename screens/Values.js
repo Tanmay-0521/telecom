@@ -331,7 +331,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
     // fontSize: FontSize.b2_size,
-    fontSize: wp(6)
+    fontSize: wp(5)
   },
   textTypo: { //rectifer status wala
     left: 7,
@@ -359,10 +359,10 @@ const styles = StyleSheet.create({
     //fontSize: FontSize.b1_size,
     fontSize: wp(6),
   },
-  systemTemperature: {  //rectifier wale
+  systemTemperature: {  //rectifier wale aur DC wale
     //width: 136,
     width: wp(35),
-    textAlign: "center",
+    textAlign: "left",
     color: Color.colorBlack,
     fontFamily: FontFamily.b1B,
     fontWeight: "700",
@@ -398,6 +398,7 @@ const styles = StyleSheet.create({
     // left: 10,
     top: hp(1),
     left: wp(2),
+    bottom: hp(2),
     padding: Padding.p_2xs,
     position: "absolute",
   },
@@ -474,7 +475,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
   },
-  values6: {
+  values6: {  //title
     // top: 70,
     // left: 39,
     top: hp(7),
@@ -485,7 +486,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.h1,
     // width: 274,
     // height: 60,
-    width: wp(30),
+    width: wp(50),
     height: hp(20),
     textAlign: "left",
     color: Color.colorBlack,

@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   systemTemperature: {  //errors wale
     // width: 136,
     width: wp(35),
-    textAlign: "center",
+    textAlign: "left",
     color: Color.colorBlack,
     fontFamily: FontFamily.b1B,
     fontWeight: "700",
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     color: Color.black,
     textAlign: "center",
     // fontSize: FontSize.b1_size,
-    fontSize: wp(7),
+    fontSize: wp(5),
   },
   wrapperShadowBox: {
     // marginLeft: 6,
