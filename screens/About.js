@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, Pressable, ScrollView } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 //import { ScrollView } from "react-native-gesture-handler";
 
 const About = () => {
@@ -81,61 +82,79 @@ const About = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  //navigation wale (about)
   pageTypo: {
-    marginLeft: 10,
+    // marginLeft: 10,
+    marginLeft: wp(2),
     color: Color.black,
     fontFamily: FontFamily.b1B,
     fontWeight: "700",
-    fontSize: FontSize.b1_size,
+    // fontSize: FontSize.b1_size,
+    fontSize: wp(6),
     textAlign: "left",
   },
-  frameViewFlexBox: {
-    padding: Padding.p_xs,
+  frameViewFlexBox: { //navigation wale
+    // padding: Padding.p_xs,
+    padding: wp(2),
     flexDirection: "row",
     alignItems: "center",
   },
-  aboutTheProject: {
-    top: 78,
-    left: 39,
-    fontSize: FontSize.h1_size,
+  aboutTheProject: {  //title
+    // top: 78,
+    // left: 39,
+    // fontSize: FontSize.h1_size,
+    top: hp(7),
+    left: wp(7),
+    fontSize: wp(10),
     fontWeight: "800",
     fontFamily: FontFamily.h1,
-    width: 274,
-    height: 120,
+    // width: 274,
+    // height: 120,
+    width: wp(40),
+    height: hp(20),
     textAlign: "left",
     color: Color.colorBlack,
     position: "absolute",
   },
-  logoIcon: {
-    top: 110,
-    right: 37,
-    width: 53,
-    height: 55,
+  logoIcon: { //logo wala
+    // top: 110,
+    // right: 37,
+    // width: 53,
+    // height: 55,
+    top: hp(8),
+    right: wp(8),
+    width: wp(10),
+    height: hp(5),
     position: "absolute",
   },
-  frameChild: {
+  frameChild: { //about wala
     alignSelf: "stretch",
     backgroundColor: Color.colorGainsboro,
-    height: 534,
+    // height: 534,
+    height: hp(72),
     opacity: 0.5,
     zIndex: 0,
     borderRadius: Border.br_xl,
   },
-  lorem: {
-    width: "76.87%",
-    top: 16,
-    left: "11.74%",
+  lorem: {  //about wala
+    // width: "76.87%",
+    // top: 16,
+    // left: "11.74%",
     fontWeight: "500",
     fontFamily: FontFamily.b1,
-    height: 511,
+    // height: 511,
     zIndex: 1,
-    fontSize: FontSize.b1_size,
+    // fontSize: FontSize.b1_size,
+    height: hp(70),
+    top: hp(2),
+    left: wp(6),
+    width: wp(65),
+    fontSize: wp(6),
     textAlign: "left",
     color: Color.colorBlack,
     position: "absolute",
   },
-  rectangleParent: {
+  rectangleParent: {  //about wale
     width: "78.06%",
     top: 195,
     right: "13.06%",
@@ -145,10 +164,12 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xl,
     position: "absolute",
   },
-  icon: {
+  icon: { //navigation wale
     borderRadius: Border.br_8xs,
-    width: 30,
-    height: 30,
+    // width: 30,
+    // height: 30,
+    width: wp(10),
+    height: hp(4),
     overflow: "hidden",
   },
   page1: {
@@ -163,11 +184,16 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_6xl,
     flexDirection: "row",
   },
-  navigator: {
-    marginLeft: -144,
-    bottom: 46,
-    left: "50%",
-    flexDirection: "row",
+  navigator: {  //navigation wala
+    // marginLeft: -144,
+    // bottom: 46,
+    // left: "50%",
+    // flexDirection: "row",
+    marginLeft: wp(-38.5),
+    bottom: hp(2),
+    left: wp(50),
+    height: hp(20),
+    top: hp(95),
     position: "absolute",
   },
   about: {
