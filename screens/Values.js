@@ -348,7 +348,8 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
     // fontSize: FontSize.b2_size,
-    fontSize: wp(5)
+    fontSize: wp(4),
+    height: hp(3),
   },
   textTypo: { //rectifer status wala
     left: 7,
@@ -378,6 +379,7 @@ const styles = StyleSheet.create({
   },
   systemTemperature: {  //rectifier wale aur DC wale
     //width: 136,
+    height: hp(10),
     width: wp(35),
     textAlign: "left",
     color: Color.colorBlack,
@@ -385,6 +387,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     //fontSize: FontSize.b1_size,
     fontSize: wp(6),
+    padding: wp(1),
   },
   wrapperShadowBox: {
     //marginLeft: 6,
@@ -547,7 +550,7 @@ const styles = StyleSheet.create({
     // left: "50%",
     // height: 54,
     // top: 675,
-    marginLeft: wp(-37),
+    marginLeft: wp(-39),
     bottom: hp(2),
     left: wp(50),
     height: hp(20),
