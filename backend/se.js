@@ -83,7 +83,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
-const port = 4000; // Or any other port you prefer
+const port = 3000; // Or any other port you prefer
 
 // MongoDB connection setup
 const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/telecom';

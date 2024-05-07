@@ -1,258 +1,3 @@
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const mongoose = require('mongoose');
-
-// const app = express();
-// const PORT = process.env.PORT || 3500;
-
-// // Replace with your MongoDB connection string
-// const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/';
-
-// // Mongoose connection setup
-// mongoose.connect(mongoURI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-// const ChannelSchema = new mongoose.Schema({
-//   id: Number,
-//   apiKey: String,
-//   name: String,
-//   temperature: Number,
-//   humidity: Number,
-//   time: Date,
-//   timestamp: Date,
-// });
-// const Channel = mongoose.model('Channel', ChannelSchema);
-
-// // Enable body-parser middleware
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-
-// // Route to handle POST requests and save data to MongoDB
-// app.post('/data', async (req, res) => {
-//   try {
-//     const { temperature, humidity, time } = req.body;
-//     const newEntry = new Channel({
-//       temperature: temperature,
-//       humidity: humidity,
-//       time: new Date(time),
-//       timestamp: new Date(),
-//     });
-//     await newEntry.save();
-//     console.log('Data saved to MongoDB:', newEntry);
-//     res.status(200).send('Data received and saved successfully');
-//   } catch (error) {
-//     console.error('Error saving data to MongoDB:', error.message);
-//     res.status(500).send('Error saving data to MongoDB');
-//   }
-// });
-
-// // Start the server
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const mongoose = require('mongoose');
-
-// const app = express();
-// const PORT = process.env.PORT || 3500;
-
-// // Replace 'your-database-name' with your actual MongoDB database name
-// const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/telecom';
-
-// // Mongoose connection setup
-// mongoose.connect(mongoURI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-// const ChannelSchema = new mongoose.Schema({
-//   temperature: Number,
-//   humidity: Number,
-//   time: Date,
-//   acVolt: Number,
-//   dcVolt: Number,
-//   rect1Curr: Number,
-//   rect2Curr: Number,
-//   rect3Curr: Number,
-//   lowDC: Number,
-//   highAC: Number,
-//   lowDC46: Number,
-//   highDC: Number,
-//   mainsFail: Number,
-//   lowAC: Number,
-//   wLowAC: Number,
-//   wHighAC: Number,
-//   wCriticalLoadSPDB: Number,
-//   wHighDC54V: Number,
-//   timestamp: Date,
-// });
-// const Channel = mongoose.model('Channel', ChannelSchema);
-
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-
-// app.post('/data', async (req, res) => {
-//   try {
-//     const {
-//       temperature,
-//       humidity,
-//       time,
-//       acVolt,
-//       dcVolt,
-//       rect1Curr,
-//       rect2Curr,
-//       rect3Curr,
-//       lowDC,
-//       highAC,
-//       lowDC46,
-//       highDC,
-//       mainsFail,
-//       lowAC,
-//       wLowAC,
-//       wHighAC,
-//       wCriticalLoadSPDB,
-//       wHighDC54V,
-//     } = req.body;
-
-//     const newEntry = new Channel({
-//       temperature,
-//       humidity,
-//       time: new Date(),
-//       acVolt,
-//       dcVolt,
-//       rect1Curr,
-//       rect2Curr,
-//       rect3Curr,
-//       lowDC,
-//       highAC,
-//       lowDC46,
-//       highDC,
-//       mainsFail,
-//       lowAC,
-//       wLowAC,
-//       wHighAC,
-//       wCriticalLoadSPDB,
-//       wHighDC54V,
-//       timestamp: new Date(),
-//     });
-
-//     await newEntry.save();
-//     // console.log(ChannelSchema.obj); // Log the schema definition
-
-//     console.log('Data saved to MongoDB:', newEntry.toObject());
-
-//     res.status(200).send('Data received and saved successfully');
-//   } catch (error) {
-//     console.error('Error saving data to MongoDB:', error.message);
-//     res.status(500).send('Error saving data to MongoDB');
-//   }
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const mongoose = require('mongoose');
-
-// const app = express();
-// const PORT = process.env.PORT || 3500;
-
-// // Replace 'your-database-name' with your actual MongoDB database name
-// const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/telecom';
-
-// // Mongoose connection setup
-// mongoose.connect(mongoURI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-// const ChannelSchema = new mongoose.Schema({
-//   temperature: Number,
-//   humidity: Number,
-//   time: Date,
-//   Acvolt: Number,
-//   Dcvolt: Number,
-//   Rect1curr: Number,
-//   Rect2curr: Number,
-//   Rect3curr: Number,
-//   Lowdc: Number,
-//   Highac: Number,
-//   Lowdc46: Number,
-//   Highdc: Number,
-//   Mainsfail: Number,
-//   Lowac: Number,
-//   Wlowac: Number,
-//   Whighac: Number,
-//   Wcriticalloadspdb: Number,
-//   Whighdc54v: Number,
-//   timestamp: Date,
-// }, { collection: 'esp32' }); // Specify the custom collection name here
-// const Channel = mongoose.model('Channel', ChannelSchema);
-
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-
-// app.post('/data', async (req, res) => {
-//   console.log('Received request body:', req.body); // Log the request body
-
-//   try {
-//     const {
-//       temperature,
-//       humidity,
-//       time,
-//       Acvolt,
-//       Dcvolt,
-//       Rect1curr,
-//       Rect2curr,
-//       Rect3curr,
-//       Lowdc,
-//       Highac,
-//       Lowdc46,
-//       Highdc,
-//       Mainsfail,
-//       Lowac,
-//       Wlowac,
-//       Whighac,
-//       Wcriticalloadspdb,
-//       Whighdc54v,
-//     } = req.body;
-
-//     const newEntry = new Channel({
-//       temperature,
-//       humidity,
-//       time: new Date(time),
-//       Acvolt: Number(Acvolt),
-//       Dcvolt: Number(Dcvolt),
-//       Rect1curr: Number(Rect1curr),
-//       Rect2curr: Number(Rect2curr),
-//       Rect3curr: Number(Rect3curr),
-//       Lowdc: Number(Lowdc),
-//       Highac: Number(Highac),
-//       Lowdc46: Number(Lowdc46),
-//       Highdc: Number(Highdc),
-//       Mainsfail: Number(Mainsfail),
-//       Lowac: Number(Lowac),
-//       Wlowac: Number(Wlowac),
-//       Whighac: Number(Whighac),
-//       Wcriticalloadspdb: Number(Wcriticalloadspdb),
-//       Whighdc54v: Number(Whighdc54v),
-//       timestamp: new Date(),
-//     });
-
-//     await newEntry.save();
-//     console.log('Data saved to MongoDB:', newEntry.toObject());
-
-//     res.status(200).send('Data received and saved successfully');
-//   } catch (error) {
-//     console.error('Error saving data to MongoDB:', error.message);
-//     res.status(500).send('Error saving data to MongoDB');
-//   }
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -378,6 +123,46 @@ app.post('/data', async (req, res) => {
     res.status(500).send('Error saving data to MongoDB');
   }
 });
+
+//merged both server
+// app.get('/api/real', async (req, res) => {
+//   try {
+//     const twoSecondsAgo = new Date(Date.now() - 2000);
+//     const lastEntries = await Channel.find({ time: { $gte: twoSecondsAgo } })
+//       .sort({ time: -1 })
+//       .limit(1)
+//       .lean();
+
+//     if (lastEntries.length === 0) {
+//       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
+//     } else {
+//       res.json(lastEntries);
+//     }
+//   } catch (error) {
+//     console.error('Error fetching real-time data:', error.message);
+//     res.status(500).json({ error: 'Failed to fetch real-time data.' });
+//   }
+// });
+
+// app.get('/api/data', async (req, res) => {
+//   try {
+//     const twentySecondsAgo = new Date(Date.now() - 20000);
+//     const lastTwentySecondsEntries = await Channel.find({ time: { $gte: twentySecondsAgo } })
+//       .sort({ time: -1 })
+//       .limit(10)
+//       .lean();
+
+//     if (lastTwentySecondsEntries.length === 0) {
+//       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
+//     } else {
+//       console.log(lastTwentySecondsEntries);
+//       res.json(lastTwentySecondsEntries);
+//     }
+//   } catch (error) {
+//     console.error('Error fetching data:', error.message);
+//     res.status(500).json({ error: 'Failed to fetch data.' });
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

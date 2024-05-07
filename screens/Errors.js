@@ -34,7 +34,8 @@ const Errors = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.63.17:4000/api/data');
+        const response = await fetch('http://192.168.108.17:3000/api/data');//tanmay wifi
+        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {
