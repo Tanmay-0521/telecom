@@ -44,8 +44,8 @@ const Values = () => {
           setRect1curr(recentData.Rect1curr);
           setRect2curr(recentData.Rect2curr);
           setRect3curr(recentData.Rect3curr);
-          setrec(recentData.Rect1curr+recentData.Rect2curr+recentData.Rect3curr);// Update recent temperature value
-          if (recentData.Rect1curr > 0 || recentData.Rect2curr > 0 || recentData.Rect3curr > 0) {
+          setrec(-1*(recentData.Rect1curr+recentData.Rect2curr+recentData.Rect3curr));// Update recent temperature value
+          if (recentData.Rect1curr > 0 || -1*recentData.Rect2curr > 0 || -1*recentData.Rect3curr > 0) {
             setR1('1/1');
             // textRatio2 = '3/3';
 

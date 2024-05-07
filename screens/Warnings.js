@@ -27,10 +27,10 @@ const Warnings = () => {
 
   // Threshold values for displaying warnings
   const thresholdValues = {
-    Wlowac: 50,
-    Whighac: 100,
-    Wcriticalloadspdb: 75,
-    Whighdc54v: 90,
+    Wlowac: -1,
+    Whighac: -1,
+    Wcriticalloadspdb: -1,
+    Whighdc54v: -1,
   };
 
   const isAboveThreshold = (value, threshold) => value > threshold;
