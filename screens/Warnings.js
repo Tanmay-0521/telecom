@@ -1,4 +1,5 @@
 import * as React from "react";
+import  { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
@@ -7,12 +8,58 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 const Warnings = () => {
   const navigation = useNavigation();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://192.168.108.17:3000/api/data');//tanmay wifi
+        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [0,0,0,0,0,0,0,0,0,0,0,0]);
+
+  // Threshold values for displaying warnings
+  const thresholdValues = {
+    Wlowac: 50,
+    Whighac: 100,
+    Wcriticalloadspdb: 75,
+    Whighdc54v: 90,
+  };
+
+  const isAboveThreshold = (value, threshold) => value > threshold;
+  const isBelowThreshold = (value, threshold) => value < threshold;
+
 
   return (
     <View style={styles.warnings}>
       <View style={styles.warningsChild} />
       <Text style={styles.warnings1}>Warnings</Text>
-      <Text style={styles.noWarnings}>No Warnings</Text>
+      {data && (
+        <View style={styles.dataContainer}>
+          {isAboveThreshold(data.Wlowac, thresholdValues.Wlowac) && (
+            <Text style={styles.dataText}>Wlowac: {data.Wlowac}</Text>
+          )}
+          {isBelowThreshold(data.Whighac, thresholdValues.Whighac) && (
+            <Text style={styles.dataText}>Whighac: {data.Whighac}</Text>
+          )}
+          {isAboveThreshold(data.Wcriticalloadspdb, thresholdValues.Wcriticalloadspdb) && (
+            <Text style={styles.dataText}>Wcriticalloadspdb: {data.Wcriticalloadspdb}</Text>
+          )}
+          {isBelowThreshold(data.Whighdc54v, thresholdValues.Whighdc54v) && (
+            <Text style={styles.dataText}>Whighdc54v: {data.Whighdc54v}</Text>
+          )}
+        </View>
+      )}
+      {!data && (
+        <Text style={styles.noWarnings}>No Warnings</Text>
+      )}
       <Image
         style={styles.logoIcon}
         contentFit="cover"
@@ -68,6 +115,16 @@ const Warnings = () => {
 };
 
 const styles = StyleSheet.create({  //navigation wale (warning)
+  dataContainer: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
+  dataText: {
+    fontSize: 16,
+    marginBottom: 10,
+    color: Color.black,
+    fontFamily: FontFamily.b1B,
+  },
   pageTypo: {
     // marginLeft: 10,
     marginLeft: wp(2),

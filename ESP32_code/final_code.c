@@ -14,7 +14,7 @@ DHT dht(DHTPIN, DHTTYPE);
 
 const char *ssid = "Tanmay";
 const char *password = "Tanmay123";
-const char *serverAddress = "http://192.168.63.17:3500/data"; // Replace with your server's IP address and port
+const char *serverAddress = "http://192.168.108.17:3500/data"; // Replace with your server's IP address and port
 
 const char *ntpServer = "in.pool.ntp.org";  // NTP server closer to India
 const long gmtOffset_sec = 19800;           // GMT offset for India (5 hours and 30 minutes ahead of GMT)

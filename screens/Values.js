@@ -23,16 +23,17 @@ const Values = () => {
   const [rect3, setRect3curr] = useState(0);
   const [humidity, sethumidity] = useState(0);
   const [tot_rec, setrec] = useState(0);
-  const [textRatio1,setR1]= useState(1/3);
-  const [textRatio2,setR2]= useState(2/3);
-  const [textRatio3,setR3]= useState(3/3);
+  const [textRatio1,setR1]= useState("0/1");
+  const [textRatio2,setR2]= useState("0/2");
+  const [textRatio3,setR3]= useState("0/3");
   //const tot_rec = {rect1} + {rect2} + {rect3};
   // let textRatio1, textRatio2,textRatio3;
   const navigation = useNavigation();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.63.17:4000/api/data');
+        const response = await fetch('http://192.168.108.17:3000/api/data');//tanmay wifi
+        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {
@@ -44,19 +45,35 @@ const Values = () => {
           setRect2curr(recentData.Rect2curr);
           setRect3curr(recentData.Rect3curr);
           setrec(recentData.Rect1curr+recentData.Rect2curr+recentData.Rect3curr);// Update recent temperature value
-          // if (recentData.Rect1curr > 0 || recentData.Rect2curr > 0 || recentData.Rect3curr > 0) {
-          //   setR1(textRatio1 = '1/3');
-          //   // textRatio2 = '3/3';
-          // } else if ((recentData.Rect1curr > 0 && recentData.Rect2curr > 0 )||(recentData.Rect2curr > 0 && recentData.Rect3curr > 0 ) ||(recentData.Rect1curr > 0 && recentData.Rect3curr > 0  )){
-          //   setR2(textRatio2 = '2/3');
-          //   // textRatio2 = '3/3';
-          // } else if (recentData.Rect1curr > 0 && recentData.Rect2curr > 0  && recentData.Rect3curr > 0 ) {
-          //   setR3(textRatio3 = '3/3');
-          // } else {
-          //   setR1(textRatio1 = '0/1');
-          //   setR2(textRatio2 = '0/2');
-          //   setR3(textRatio3= '0/3');
-          // }
+          if (recentData.Rect1curr > 0 || recentData.Rect2curr > 0 || recentData.Rect3curr > 0) {
+            setR1('1/1');
+            // textRatio2 = '3/3';
+
+            if ((recentData.Rect1curr > 0 && recentData.Rect2curr > 0 )||(recentData.Rect2curr > 0 && recentData.Rect3curr > 0 ) ||(recentData.Rect1curr > 0 && recentData.Rect3curr > 0  )){
+              setR2('2/2');
+              // textRatio2 = '3/3';
+            } 
+            else {
+              setR2( '1/2');
+            }
+
+            if (recentData.Rect1curr > 0 && recentData.Rect2curr > 0  && recentData.Rect3curr > 0 ) {
+            setR3( '3/3');
+          } else {
+            if(textRatio2 == '2/2')
+                 setR3('2/3');
+            else(textRatio2 == '1/2') 
+                setR3('1/3');
+          }
+
+
+          }else {
+            setR1( '0/1');
+            setR2( '0/2');
+            setR3( '0/3');
+          }
+          
+          
         }
         // let textRatio1, textRatio2;
         
@@ -192,7 +209,7 @@ const Values = () => {
     source={require("../assets/line-2.png")}
   />
   {/* <Text style={[styles.text, styles.cTypo]}>1</Text> */}
-  <Text style={[styles.text1, styles.textTypo, textRatio1 === '1/3' ? styles.greenText : styles.textTypo]}>
+  <Text style={[styles.text1, styles.textTypo, textRatio1 === '1/1' ? styles.greenText : styles.textTypo]}>
     {textRatio1}
   </Text>
 </View>
@@ -203,7 +220,7 @@ const Values = () => {
     source={require("../assets/line-2.png")}
   />
   {/* <Text style={[styles.text2, styles.textTypo]}>2</Text> */}
-  <Text style={[styles.text1, styles.textTypo, textRatio2 === '2/3' ? styles.greenText : styles.textTypo]}>
+  <Text style={[styles.text1, styles.textTypo, textRatio2 === '2/2' ? styles.greenText : styles.textTypo]}>
     {textRatio2}
   </Text>
 </View>
