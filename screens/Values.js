@@ -358,7 +358,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
     //fontSize: FontSize.b2_size,
-    fontSize: wp(2),
+    fontSize: wp(3),
     position: "absolute",
   },
   iconFlexBox: {  //navigation wale

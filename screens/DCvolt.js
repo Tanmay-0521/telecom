@@ -50,6 +50,7 @@ const DCvolt = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <View style={{transform: [{ rotateY: '40deg' }]}}>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Dc Volt vs Time</Text>
         <View style={styles.chartContainer}>
@@ -65,6 +66,7 @@ const DCvolt = () => {
             bezier
           />
         </View>
+      </View>
       </View>
     </ScrollView>
   );
