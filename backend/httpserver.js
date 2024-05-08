@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 
 const app = express();
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 80;
 
 // Replace 'your-database-name' with your actual MongoDB database name
 const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/telecom';
