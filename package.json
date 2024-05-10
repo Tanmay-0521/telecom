@@ -42,7 +42,8 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg": "^14.1.0",
     "react-native-svg-charts": "^5.4.0",
-    "ws": "^8.16.0"
+    "ws": "^8.16.0",
+    "expo-dev-client": "~3.3.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

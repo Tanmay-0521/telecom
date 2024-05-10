@@ -2,7 +2,9 @@ import * as React from "react";
 import  { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, Pressable, ScrollView } from "react-native";
 //import { Text, StyleSheet, View, Pressable } from "react-native";
-import { Image } from "expo-image";
+// import { Image } from "expo-image";
+import { Image } from 'react-native';
+
 import { useNavigation } from "@react-navigation/native";
 import { Color, Padding, Border, FontFamily, FontSize } from "../GlobalStyles";
 import RealTimeGraphsScreen from "./RealTimeGraphsScreen ";
