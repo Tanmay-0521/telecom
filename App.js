@@ -19,7 +19,7 @@ import Rect3curr from "./screens/Rect3curr";
 import ACvolt from "./screens/ACvolt";
 import DCvolt from "./screens/DCvolt";
 import Totreccurr from "./screens/Totreccurr";
-
+// import ChartPointer from "./screens/ChartPointer";
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
