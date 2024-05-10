@@ -16,7 +16,7 @@ const ACvolt = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.108.17:3000/api/data');//tanmay wifi
+        const response = await fetch('http://3.137.3.102:3000/api/data');//tanmay wifi
         // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here
