@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
 import  { useState, useEffect } from 'react';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import NetInfo from "@react-native-community/netinfo";
 
 const Errors = () => {
   const navigation = useNavigation();
@@ -18,6 +19,7 @@ const Errors = () => {
   const [lowdc,setlowdc]= useState(0);
   const [lowdc46,setlowdc46]= useState(0);
   const [highdc,sethighdc]= useState(0);
+  const [isConnected, setIsConnected] = useState(true);
 
   //const tot_rec = {rect1} + {rect2} + {rect3};
   // // let textRatio1, textRatio2,textRatio3;
@@ -34,6 +36,9 @@ const Errors = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const state = await NetInfo.fetch();
+        setIsConnected(state.isConnected);
+
         const response = await fetch('http://3.137.3.102:3000/api/data');//tanmay wifi
         // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
@@ -150,9 +155,12 @@ const Errors = () => {
               <Text style={styles.c}>{criticalspd}</Text>
             </View>
           </View>
+          {/* <View style={[styles.dot, isConnected ? styles.greenDot : styles.redDot]} /> */}
         </View>
         </ScrollView>
+        <View style={[styles.dot, isConnected ? styles.greenDot : styles.redDot]} />
       </View>
+     
       <Text style={styles.alarms}>Alarms</Text>
       <Image
         style={styles.logoIcon}
@@ -383,6 +391,20 @@ const styles = StyleSheet.create({
     height: 800,
     overflow: "hidden",
   },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    position: "absolute",
+    right: 11,
+    top: 5,
+  },
+  greenDot: {
+    backgroundColor: "green",
+  },
+  redDot: {
+    backgroundColor: "red",
+  }
 });
 
 export default Errors;

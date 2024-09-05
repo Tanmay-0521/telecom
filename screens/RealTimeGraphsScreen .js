@@ -228,8 +228,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
+import NetInfo from "@react-native-community/netinfo";
 
 const RealTimeGraphsScreen = () => {
+
+  const [isConnected, setIsConnected] = useState(true);
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -243,6 +246,9 @@ const RealTimeGraphsScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const state = await NetInfo.fetch();
+        setIsConnected(state.isConnected);
+
         const response = await fetch('http://3.137.3.102:3000/api/data'); // API endpoint for fetching data
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here
@@ -300,6 +306,7 @@ const RealTimeGraphsScreen = () => {
           />
         </View>
       </View>
+      < View style={[styles.dot, isConnected ? styles.greenDot : styles.redDot]} />
     </ScrollView>
   );
 };
@@ -307,6 +314,9 @@ const RealTimeGraphsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    top:250,
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#fff',
   },
   section: {
@@ -320,7 +330,20 @@ const styles = StyleSheet.create({
   chartContainer: {
     alignItems: 'center',
   },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    position: "absolute",
+    right: 8,
+    top: 8,
+  },
+  greenDot: {
+    backgroundColor: "green",
+  },
+  redDot: {
+    backgroundColor: "red",
+  }
 });
-
 export default RealTimeGraphsScreen;
 

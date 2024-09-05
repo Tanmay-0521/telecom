@@ -5,15 +5,20 @@ import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import NetInfo from "@react-native-community/netinfo";
 
 const Warnings = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);
+  const [isConnected, setIsConnected] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.108.17:3000/api/data');//tanmay wifi
+        const state = await NetInfo.fetch();
+        setIsConnected(state.isConnected);
+
+        const response = await fetch('http://3.137.3.102:3000/api/data');//tanmay wifi
         // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const jsonData = await response.json();
         setData(jsonData);
@@ -41,6 +46,7 @@ const Warnings = () => {
     <View style={styles.warnings}>
       <View style={styles.warningsChild} />
       <Text style={styles.warnings1}>Warnings</Text>
+      
       {data && (
         <View style={styles.dataContainer}>
           {isAboveThreshold(data.Wlowac, thresholdValues.Wlowac) && (
@@ -55,6 +61,7 @@ const Warnings = () => {
           {isBelowThreshold(data.Whighdc54v, thresholdValues.Whighdc54v) && (
             <Text style={styles.dataText}>Whighdc54v: {data.Whighdc54v}</Text>
           )}
+          <View style={[styles.dot, isConnected ? styles.greenDot : styles.redDot]} />
         </View>
       )}
       {!data && (
@@ -241,6 +248,20 @@ const styles = StyleSheet.create({  //navigation wale (warning)
     height: 800,
     overflow: "hidden",
   },
+  ot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    position: "absolute",
+    right: 11,
+    top: 5,
+  },
+  greenDot: {
+    backgroundColor: "green",
+  },
+  redDot: {
+    backgroundColor: "red",
+  }
 });
 
 export default Warnings;

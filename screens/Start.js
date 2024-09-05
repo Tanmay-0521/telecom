@@ -1,4 +1,4 @@
-import * as React from "react";
+import  React, { useState, useEffect } from "react";
 import RealTimeGraphsScreen from "./RealTimeGraphsScreen ";
 import Values from "./Values";
 import { Text, StyleSheet, View } from "react-native";
@@ -6,9 +6,24 @@ import { Image } from "expo-image";
 import { Color, FontSize, FontFamily, Border, Padding } from "../GlobalStyles";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { useNavigation } from "@react-navigation/native";
+import NetInfo from "@react-native-community/netinfo";
 
 const Start = () => {
   const navigation = useNavigation();
+  const [isConnected, setIsConnected] = useState(true);
+
+  useEffect(() => {
+    // Simulate internet connection status change
+    const timer = setInterval(() => {
+      NetInfo.fetch().then(state => {
+        setIsConnected(state.isConnected);
+      });
+    }, 5000);// Change every 1 seconds
+    
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <View style={[styles.start, styles.startBg]}>
       <View style={styles.frameParent}>
@@ -31,6 +46,7 @@ const Start = () => {
             contentFit="cover"
             source={require("../assets/icon-placeholder.png")}
           />
+          <View style={[styles.dot, isConnected ? styles.greenDot : styles.redDot]} />
         </View>
         </Pressable>
       </View>
@@ -120,6 +136,20 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 800,
   },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    position: "absolute",
+    right: 8,
+    top: 8,
+  },
+  greenDot: {
+    backgroundColor: "green",
+  },
+  redDot: {
+    backgroundColor: "red",
+  }
 });
 
 export default Start;

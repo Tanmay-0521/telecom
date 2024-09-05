@@ -15,6 +15,7 @@ import DCvolt from "./DCvolt";
 import Totreccurr from "./Totreccurr";
 import { Dimensions } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import NetInfo from "@react-native-community/netinfo";
 
 const Values = () => {
   const [temperature, setTemperature] = useState(0);
@@ -28,14 +29,17 @@ const Values = () => {
   const [textRatio1,setR1]= useState("0/1");
   const [textRatio2,setR2]= useState("0/2");
   const [textRatio3,setR3]= useState("0/3");
+  const [isConnected, setIsConnected] = useState(true);
   //const tot_rec = {rect1} + {rect2} + {rect3};
   // let textRatio1, textRatio2,textRatio3;
   const navigation = useNavigation();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://3.137.3.102:3000/api/data');//cloud port
-        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
+        const state = await NetInfo.fetch();
+        setIsConnected(state.isConnected);
+
+        const response = await fetch('http://3.137.3.102:3000/api/data');        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {
@@ -240,8 +244,10 @@ const Values = () => {
           </View>
         </View>
         </ScrollView>
+        <View style={[styles.dot, isConnected ? styles.greenDot : styles.redDot]} />
       </View>
       <Text style={styles.values6}>Values</Text>
+      
       {/* <Pressable
             onPress={() => navigation.navigate(PressableMenu)}> */}
         <Image
@@ -249,6 +255,7 @@ const Values = () => {
           contentFit="cover"
           source={require("../assets/logo.png")} 
         />
+        
       {/* </Pressable> */}
       <View style={styles.navigator}>
         <View style={styles.navi}>
@@ -566,6 +573,20 @@ const styles = StyleSheet.create({
     height: 800,
     overflow: "hidden",
   },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    position: "absolute",
+    right: 8,
+    top: 8,
+  },
+  greenDot: {
+    backgroundColor: "green",
+  },
+  redDot: {
+    backgroundColor: "red",
+  }
 });
 
 export default Values;

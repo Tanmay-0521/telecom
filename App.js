@@ -22,6 +22,13 @@ import Totreccurr from "./screens/Totreccurr";
 // import ChartPointer from "./screens/ChartPointer";
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
+//   Usage :-> use state
+// Adding state to a component
+// Updating state based on the previous state
+// Updating objects and arrays in state
+// Avoiding recreating the initial state
+// Resetting state with a key
+// Storing information from previous renders
 
   const [fontsLoaded, error] = useFonts({
     "Inter-Regular": require("./assets/fonts/Inter-Regular.ttf"),
