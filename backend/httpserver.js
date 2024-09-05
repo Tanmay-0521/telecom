@@ -1,19 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
-
+require('dotenv').config();
+const mongoURI = process.env.mongoURL;
 const app = express();
 const PORT = process.env.PORT || 80;
 
-// Replace 'your-database-name' with your actual MongoDB database name
-const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/telecom';
-
+const clientOptions = {};
 // Mongoose connection setup
-mongoose.connect(mongoURI, {
-  // useNewUrlParser: true,
-  // useUnifiedTopology: true,
-});
+mongoose.connect(mongoURI);
+
+
 const ChannelSchema = new mongoose.Schema({
   temperature: Number,
   humidity: Number,
@@ -34,7 +31,7 @@ const ChannelSchema = new mongoose.Schema({
   Wcriticalloadspdb: Number,
   Whighdc54v: Number,
   timestamp: Date,
-}, { collection: 'esp32' }); // Specify the custom collection name here
+}); // Specify the custom collection name here
 const Channel = mongoose.model('Channel', ChannelSchema);
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -123,47 +120,6 @@ app.post('/data', async (req, res) => {
     res.status(500).send('Error saving data to MongoDB');
   }
 });
-
-//merged both server
-// app.get('/api/real', async (req, res) => {
-//   try {
-//     const twoSecondsAgo = new Date(Date.now() - 2000);
-//     const lastEntries = await Channel.find({ time: { $gte: twoSecondsAgo } })
-//       .sort({ time: -1 })
-//       .limit(1)
-//       .lean();
-
-//     if (lastEntries.length === 0) {
-//       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
-//     } else {
-//       res.json(lastEntries);
-//     }
-//   } catch (error) {
-//     console.error('Error fetching real-time data:', error.message);
-//     res.status(500).json({ error: 'Failed to fetch real-time data.' });
-//   }
-// });
-
-// app.get('/api/data', async (req, res) => {
-//   try {
-//     const twentySecondsAgo = new Date(Date.now() - 20000);
-//     const lastTwentySecondsEntries = await Channel.find({ time: { $gte: twentySecondsAgo } })
-//       .sort({ time: -1 })
-//       .limit(10)
-//       .lean();
-
-//     if (lastTwentySecondsEntries.length === 0) {
-//       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
-//     } else {
-//       console.log(lastTwentySecondsEntries);
-//       res.json(lastTwentySecondsEntries);
-//     }
-//   } catch (error) {
-//     console.error('Error fetching data:', error.message);
-//     res.status(500).json({ error: 'Failed to fetch data.' });
-//   }
-// });
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

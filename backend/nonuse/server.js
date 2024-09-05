@@ -113,15 +113,14 @@ const express = require('express');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config();
+const mongoURI = process.env.mongoURL;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Enable CORS
 app.use(cors());
-
-// Replace with your MongoDB connection string
-const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/';
 
 // Mongoose connection setup
 mongoose.connect(mongoURI, {

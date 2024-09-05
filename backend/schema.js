@@ -1,102 +1,52 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3500;
+app.use(bodyParser.json());
 
-// Replace 'your-database-name' with your actual MongoDB database name
-const mongoURI = 'mongodb+srv://Tan0521:0521Tanmay@cluster0.bdc9agc.mongodb.net/test';
+// Get MongoDB URI from environment variables
+const mongoURI = process.env.mongoURL;
 
-// Mongoose connection setup
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Mongoose connection setup with error handling
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB successfully'))
+  .catch(err => console.error('Failed to connect to MongoDB:', err));
+
+// Define the Mongoose schema for your collection
 const ChannelSchema = new mongoose.Schema({
-  temperature: Number,
-  humidity: Number,
-  time: Date,
-  acVolt: Number,
-  dcVolt: Number,
-  rect1Curr: Number,
-  rect2Curr: Number,
-  rect3Curr: Number,
-  lowDC: Number,
-  highAC: Number,
-  lowDC46: Number,
-  highDC: Number,
-  mainsFail: Number,
-  lowAC: Number,
-  wLowAC: Number,
-  wHighAC: Number,
-  wCriticalLoadSPDB: Number,
-  wHighDC54V: Number,
-  timestamp: Date,
+  temperature: { type: Number, required: true },
+  humidity: { type: Number, required: true },
+  time: { type: Date, default: Date.now },
+  acVolt: { type: Number, required: true },
+  dcVolt: { type: Number, required: true },
+  rect1Curr: { type: Number, required: true },
+  rect2Curr: { type: Number, required: true },
+  rect3Curr: { type: Number, required: true },
+  lowDC: { type: Number, required: true },
+  highAC: { type: Number, required: true },
+  lowDC46: { type: Number, required: true },
+  highDC: { type: Number, required: true },
+  mainsFail: { type: Number, required: true },
+  lowAC: { type: Number, required: true },
+  wLowAC: { type: Number, required: true },
+  wHighAC: { type: Number, required: true },
+  wCriticalLoadSPDB: { type: Number, required: true },
+  wHighDC54V: { type: Number, required: true },
+  timestamp: { type: Date, default: Date.now },
 });
+
+// Create a Mongoose model based on the schema
 const Channel = mongoose.model('Channel', ChannelSchema);
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+// Example route to test the connection and schema
+app.get('/', (req, res) => {
+  res.send('Server is running and connected to MongoDB');
+});
 
-// app.post('/data', async (req, res) => {
-//   try {
-//     const {
-//       temperature,
-//       humidity,
-//       time,
-//       acVolt,
-//       dcVolt,
-//       rect1Curr,
-//       rect2Curr,
-//       rect3Curr,
-//       lowDC,
-//       highAC,
-//       lowDC46,
-//       highDC,
-//       mainsFail,
-//       lowAC,
-//       wLowAC,
-//       wHighAC,
-//       wCriticalLoadSPDB,
-//       wHighDC54V,
-//     } = req.body;
-
-//     const newEntry = new Channel({
-//       temperature,
-//       humidity,
-//       time: new Date(),
-//       acVolt,
-//       dcVolt,
-//       rect1Curr,
-//       rect2Curr,
-//       rect3Curr,
-//       lowDC,
-//       highAC,
-//       lowDC46,
-//       highDC,
-//       mainsFail,
-//       lowAC,
-//       wLowAC,
-//       wHighAC,
-//       wCriticalLoadSPDB,
-//       wHighDC54V,
-//       timestamp: new Date(),
-//     });
-
-//     await newEntry.save();
-//     // console.log(ChannelSchema.obj); // Log the schema definition
-
-//     console.log('Data saved to MongoDB:', newEntry.toObject());
-
-//     res.status(200).send('Data received and saved successfully');
-//   } catch (error) {
-//     console.error('Error saving data to MongoDB:', error.message);
-//     res.status(500).send('Error saving data to MongoDB');
-//   }
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
+// Start the Express server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
