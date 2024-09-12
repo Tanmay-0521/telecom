@@ -1,11 +1,10 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 
 const app = express();
-const port = 3000; // Or any other port you prefer
-require('dotenv').config();
+const port = process.env.PORT2 ; // Or any other port you prefer
 const mongoURI = process.env.mongoURL;
 
 mongoose.connect(mongoURI, {
