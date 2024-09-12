@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post('/data', async (req, res) => {
-  console.log('Received request body:', req.body); // Log the request body
+  // console.log('Received request body:', req.body); // Log the request body
 
   try {
     const {
@@ -111,7 +111,7 @@ app.post('/data', async (req, res) => {
     });
 
     await newEntry.save();
-    console.log('Data saved to MongoDB:', newEntry.toObject());
+    console.log('Data saved to MongoDB:');
     // console.log(newEntry.time);
     // console.log(time);
     res.status(200).send('Data received and saved successfully');

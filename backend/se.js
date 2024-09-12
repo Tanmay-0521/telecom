@@ -41,7 +41,7 @@ const fetchRealTimeData = async () => {
     if (!latestData) {
       throw new Error('No data found');
     }
-    console.log(latestData);
+    // console.log(latestData);
     return { temperature: latestData.temperature, humidity: latestData.humidity };
   } catch (error) {
     console.error('Error fetching real-time data:', error.message);
@@ -49,28 +49,46 @@ const fetchRealTimeData = async () => {
   }
 };
 
+// app.get('/api/real', async (req, res) => {
+//   try {
+//     const twoSecondsAgo = new Date(Date.now() - 2000);
+//     const lastEntries = await Channel.find({ time: { $gte: twoSecondsAgo } })
+//       .sort({ time: -1 })
+//       .limit(1)
+//       .lean();
+
+//     if (lastEntries.length === 0) {
+//       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
+//     } else {
+//       res.json(lastEntries);
+//     }
+//   } catch (error) {
+//     console.error('Error fetching real-time data:', error.message);
+//     res.status(500).json({ error: 'Failed to fetch real-time data.' });
+//   }
+// });
 app.get('/api/real', async (req, res) => {
   try {
-    const twoSecondsAgo = new Date(Date.now() - 2000);
-    const lastEntries = await Channel.find({ time: { $gte: twoSecondsAgo } })
-      .sort({ time: -1 })
-      .limit(1)
+    // Fetch the latest entry regardless of the time
+    const latestEntry = await Channel.findOne()
+      .sort({ time: -1 }) // Sort by time in descending order to get the latest entry
       .lean();
 
-    if (lastEntries.length === 0) {
-      res.status(404).json({ error: 'No data found in the last 20 seconds.' });
+    if (!latestEntry) {
+      res.status(404).json({ error: 'No data found.' });
     } else {
-      res.json(lastEntries);
+      res.json(latestEntry); // Return the latest entry
     }
   } catch (error) {
-    console.error('Error fetching real-time data:', error.message);
-    res.status(500).json({ error: 'Failed to fetch real-time data.' });
+    console.error('Error fetching the latest data:', error.message);
+    res.status(500).json({ error: 'Failed to fetch the latest data.' });
   }
 });
 
+
 app.get('/api/data', async (req, res) => {
   try {
-    const twentySecondsAgo = new Date(Date.now() - 20000);
+    const twentySecondsAgo = new Date(Date.now() - 1000);
     const lastTwentySecondsEntries = await Channel.find({ time: { $gte: twentySecondsAgo } })
       .sort({ time: -1 })
       .limit(10)
@@ -79,7 +97,7 @@ app.get('/api/data', async (req, res) => {
     if (lastTwentySecondsEntries.length === 0) {
       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
     } else {
-      console.log(lastTwentySecondsEntries);
+      // console.log(lastTwentySecondsEntries);
       res.json(lastTwentySecondsEntries);
     }
   } catch (error) {
