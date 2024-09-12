@@ -16,6 +16,7 @@ import Totreccurr from "./Totreccurr";
 import { Dimensions } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import NetInfo from "@react-native-community/netinfo";
+import {DATA_API} from '@env';
 
 const Values = () => {
   const [temperature, setTemperature] = useState(0);
@@ -39,7 +40,7 @@ const Values = () => {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
 
-        const response = await fetch('http://3.137.3.102:3000/api/data');        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
+        const response = await fetch(DATA_API);        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {

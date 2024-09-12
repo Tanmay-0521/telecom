@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import NetInfo from "@react-native-community/netinfo";
-
+import {DATA_API} from '@env';
 const Warnings = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);
@@ -18,7 +18,7 @@ const Warnings = () => {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
 
-        const response = await fetch('http://3.137.3.102:3000/api/data');//tanmay wifi
+        const response = await fetch(DATA_API);//tanmay wifi
         // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const jsonData = await response.json();
         setData(jsonData);

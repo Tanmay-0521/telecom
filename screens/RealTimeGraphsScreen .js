@@ -229,7 +229,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import NetInfo from "@react-native-community/netinfo";
-
+import {DATA_API} from '@env';
 const RealTimeGraphsScreen = () => {
 
   const [isConnected, setIsConnected] = useState(true);
@@ -249,7 +249,7 @@ const RealTimeGraphsScreen = () => {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
 
-        const response = await fetch('http://3.137.3.102:3000/api/data'); // API endpoint for fetching data
+        const response = await fetch(DATA_API); // API endpoint for fetching data
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here
         const tempData = data.map(item => item.temperature);
