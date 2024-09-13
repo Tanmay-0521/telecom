@@ -1,7 +1,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config({path:'../.env'});
 
 const app = express();
 const port = process.env.PORT2 ; // Or any other port you prefer
@@ -97,7 +97,7 @@ app.get('/api/data', async (req, res) => {
     if (lastTwentySecondsEntries.length === 0) {
       res.status(404).json({ error: 'No data found in the last 20 seconds.' });
     } else {
-      // console.log(lastTwentySecondsEntries);
+      console.log(lastTwentySecondsEntries);
       res.json(lastTwentySecondsEntries);
     }
   } catch (error) {

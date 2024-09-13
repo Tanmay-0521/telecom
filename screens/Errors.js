@@ -6,7 +6,7 @@ import { Color, FontFamily, FontSize, Padding, Border } from "../GlobalStyles";
 import  { useState, useEffect } from 'react';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import NetInfo from "@react-native-community/netinfo";
-import {DATA_API} from '@env';
+import {DATA_API} from "@env";
 const Errors = () => {
   const navigation = useNavigation();
   // const [lowac,setLowac]= useState(0);

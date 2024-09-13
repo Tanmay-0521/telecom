@@ -16,8 +16,7 @@ import Totreccurr from "./Totreccurr";
 import { Dimensions } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import NetInfo from "@react-native-community/netinfo";
-import {DATA_API} from '@env';
-
+import {DATA_API} from "@env";
 const Values = () => {
   const [temperature, setTemperature] = useState(0);
   const [Acvolt, setACvolt] = useState(0);
@@ -39,8 +38,9 @@ const Values = () => {
       try {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
-
-        const response = await fetch(DATA_API);        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
+        console.log(DATA_API); 
+        const response = await fetch(DATA_API); 
+        // const response = await fetch('http://172.16.80.65:3000/api/data');        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
         if (recentData) {
@@ -88,7 +88,7 @@ const Values = () => {
         console.error('Error fetching temperature data:', error);
       }
     };
-    const interval = setInterval(fetchData, 2000); // Fetch data every 2 seconds
+    const interval = setInterval(fetchData, 1000); // Fetch data every 1 seconds
     
 
     return () => clearInterval(interval); // Clean up the interval on unmount

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView, Dimensions } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import NetInfo from "@react-native-community/netinfo";
-import {DATA_API} from '@env';
+import {DATA_API} from "@env";
 
 const DCvolt = () => {
   const [isConnected, setIsConnected] = useState(true);

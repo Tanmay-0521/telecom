@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config({path:'../.env'});
 const mongoURI = process.env.mongoURL;
 const app = express();
 const PORT = process.env.PORT1;
@@ -111,7 +111,7 @@ app.post('/data', async (req, res) => {
     });
 
     await newEntry.save();
-    console.log('Data saved to MongoDB:');
+    console.log('Data saved to MongoDB:newEntry');
     // console.log(newEntry.time);
     // console.log(time);
     res.status(200).send('Data received and saved successfully');
