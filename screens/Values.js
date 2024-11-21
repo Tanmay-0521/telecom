@@ -39,7 +39,7 @@ const Values = () => {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
         // console.log(DATA_API); 
-        const response = await fetch(DATA_API); 
+        const response = await fetch("http://192.168.29.17:3000/api/data"); 
         // const response = await fetch('http://172.16.80.65:3000/api/data');        // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point

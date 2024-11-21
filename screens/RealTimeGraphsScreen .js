@@ -249,7 +249,7 @@ const RealTimeGraphsScreen = () => {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
 
-        const response = await fetch(DATA_API); // API endpoint for fetching data
+        const response = await fetch("http://192.168.29.17:3000/api/data"); // API endpoint for fetching data
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here
         const tempData = data.map(item => item.temperature);

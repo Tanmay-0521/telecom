@@ -21,7 +21,7 @@ const Rect1curr = () => {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
 
-        const response = await fetch(DATA_API);//tanmay wifi
+        const response = await fetch("http://192.168.29.17:3000/api/data");//tanmay wifi
         // const response = await fetch('http://172.16.80.96:3500/api/data');//college wifi
         const data = await response.json();
         const labels = data.map(item => formatTime(item.time)); // Format time here

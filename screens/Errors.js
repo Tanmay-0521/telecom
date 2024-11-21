@@ -39,7 +39,7 @@ const Errors = () => {
         const state = await NetInfo.fetch();
         setIsConnected(state.isConnected);
 
-        const response = await fetch(DATA_API);
+        const response = await fetch("http://192.168.29.17:3000/api/data");
        
         const data = await response.json();
         const recentData = data[0]; // Get the most recent data point
